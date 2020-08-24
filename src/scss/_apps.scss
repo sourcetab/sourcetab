@@ -1,0 +1,43 @@
+@use "@material/dialog";
+
+@use "@material/button";
+
+@use "@material/floating-label/mdc-floating-label";
+@use "@material/line-ripple/mdc-line-ripple";
+@use "@material/notched-outline/mdc-notched-outline";
+@use "@material/textfield";
+
+@use "@material/list/mdc-list";
+@use "@material/menu-surface/mdc-menu-surface";
+@use "@material/menu/mdc-menu";
+
+@include dialog.core-styles;
+@include button.core-styles;
+@include textfield.core-styles;
+
+
+#app-container {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    grid-column-gap: 5%;
+    grid-row-gap: 5%;
+    padding: 5%;
+}
+
+#app-container>a {
+    text-decoration: none;
+}
+
+#app-container>a>svg {
+    border-radius: 10%;
+}
+
+#app-container>a>p {
+    text-align: center;
+    color: #000;
+}
+
+
+#app-dialog-content>label:not(:first-of-type) {
+    margin-top: 12px;
+}

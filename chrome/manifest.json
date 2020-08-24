@@ -1,0 +1,15 @@
+{
+    "name": "Web Launcher",
+    "description": "Replace your newtab page with a more productive dashboard.",
+    "chrome_url_overrides": {
+        "newtab": "index.html"
+    },
+    "content_security_policy": "script-src 'self' 'unsafe-eval'; object-src 'self'",
+    "icons": {
+        "128": "./icons/128.png"
+    },
+    "manifest_version": 2,
+    "permissions": [
+        "storage"
+    ]
+}

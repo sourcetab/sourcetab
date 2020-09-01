@@ -12,23 +12,21 @@ module.exports = (() => {
   };
 
   /**
-     * Used to add a 0 to the front of a one digit number
-     * @param {number} i
-     */
+   * Make sure numbers are have two digits.
+   * @param {number} i
+   */
   const zero = (i) => (i < 10 ? `0${i}` : i);
 
   const render = () => {
     data.get('time', (result) => {
-      const date = new Date();
-      let h = zero(date.getHours());
-      const m = zero(date.getMinutes());
-      const s = zero(date.getSeconds());
-      const g = ' : ';
       if (result.render) {
-        if (!result.twentyFourHourFormat && h > 12) {
-          h -= 12;
-        }
-        $('#time').text(h + g + m + ((result.renderSeconds) ? g + s : ''));
+        const date = new Date();
+        let h = date.getHours();
+        h = h - (!result.twentyFourHourFormat && h > 12 ? 12 : 0);
+        const m = zero(date.getMinutes());
+        const s = zero(date.getSeconds());
+        const g = ' : ';
+        $('#time').text(h + g + m + (result.renderSeconds ? g + s : ''));
       }
     });
   };

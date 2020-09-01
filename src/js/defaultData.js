@@ -17,34 +17,34 @@ const icons = {
  */
 module.exports = {
   /**
-     * an array of preset apps
-     * @type {Array.<{name: string, url: string, icon: string}>}
-     */
+   * an array of preset apps
+   * @type {Array.<{name: string, url: string, icon: string}>}
+   */
   apps: [{
-    name: 'Amazon',
-    url: 'https://www.amazon.com',
-    icon: icons.amazon.default,
-  },
-  {
-    name: 'Drive',
-    url: 'https://drive.google.com',
-    icon: icons.drive.default,
-  },
-  {
-    name: 'Gmail',
-    url: 'https://mail.google.com',
-    icon: icons.gmail.default,
-  },
-  {
-    name: 'Google',
-    url: 'https://www.google.com',
-    icon: icons.google.default,
-  },
-  {
-    name: 'YouTube',
-    url: 'https://www.youtube.com',
-    icon: icons.youtube.default,
-  },
+      name: 'Amazon',
+      url: 'https://www.amazon.com',
+      icon: icons.amazon.default,
+    },
+    {
+      name: 'Drive',
+      url: 'https://drive.google.com',
+      icon: icons.drive.default,
+    },
+    {
+      name: 'Gmail',
+      url: 'https://mail.google.com',
+      icon: icons.gmail.default,
+    },
+    {
+      name: 'Google',
+      url: 'https://www.google.com',
+      icon: icons.google.default,
+    },
+    {
+      name: 'YouTube',
+      url: 'https://www.youtube.com',
+      icon: icons.youtube.default,
+    },
   ],
   time: {
     render: true,

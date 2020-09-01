@@ -31,10 +31,10 @@ module.exports = (() => {
       if (index === null) {
         dialog.open();
       } else {
-        data.get(`apps[${index}]`, (result) => {
-          $('#app-dialog-name').val(result.name);
-          $('#app-dialog-url').val(result.url);
-          $('#app-dialog-icon').val(result.icon);
+        data.get('apps', (result) => {
+          $('#app-dialog-name').val(result[index].name);
+          $('#app-dialog-url').val(result[index].url);
+          $('#app-dialog-icon').val(result[index].icon);
           dialog.open();
         });
       }

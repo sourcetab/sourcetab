@@ -13,6 +13,9 @@
     "chrome": "readonly"
   },
   "rules": {
-    "require-jsdoc": "warn"
+    "require-jsdoc": "warn",
+    "no-use-before-define": "off",
+    "max-len": "off",
+    "import/no-extraneous-dependencies": "none"
   }
 }

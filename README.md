@@ -8,7 +8,7 @@ Web Launcher is an extension for multiple browsers, and also has a demo you can 
 
 | [Demo]() | [Chrome]() | [Firefox]() |
 | :------------: | :------------: | :------------: |
-|  | [![Chrome](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/chrome.png "Chrome")](http:// "Chrome") | [![Firefox](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/firefox.png "Firefox")](http:// "Firefox") |
+| [![Demo](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/icons/128.png "Demo")](http:// "Demo") | [![Chrome](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/chrome.png "Chrome")](http:// "Chrome") | [![Firefox](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/firefox.png "Firefox")](http:// "Firefox") |
 
 ## Development
 

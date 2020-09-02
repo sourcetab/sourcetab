@@ -80,9 +80,11 @@ module.exports = (() => {
         break;
 
       case 'CHROME':
-        chrome.storage.local.get(dataKey, (result) => {
-          callback(dataPathHandler(result[dataKey], key));
-        });
+        chrome.storage.local.get(dataKey, (result) => callback(dataPathHandler(result[dataKey], key)));
+        break;
+
+      case 'FIREFOX':
+        browser.storage.local.get(dataKey).then((result) => callback(dataPathHandler(result[dataKey], key)));
         break;
       default:
         break;
@@ -110,6 +112,14 @@ module.exports = (() => {
           chrome.storage.local.set({
             [dataKey]: dataPathHandler(result, key, value),
           }, callback);
+        });
+        break;
+
+      case 'FIREFOX':
+        get('', (result) => {
+          browser.storage.local.set({
+            [dataKey]: dataPathHandler(result, key, value)
+          }).then(() => callback());
         });
         break;
       default:

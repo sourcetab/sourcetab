@@ -5,6 +5,7 @@
   "scripts": {
     "build": "npm run build-web; npm run build-chrome;",
     "build-chrome": "webpack --config ./webpack/webpack.chrome.js",
+    "build-firefox": "webpack --config ./webpack/webpack.firefox.js",
     "build-web": "webpack --config ./webpack/webpack.web.js",
     "start": "webpack-dev-server --config ./webpack/webpack.dev.js --open"
   },

@@ -11,7 +11,7 @@ module.exports = WebpackMerge(common, {
     mode: 'production',
     output: {
         filename: '[name]-[contentHash].js',
-        path: path.resolve(__dirname, '../build/chrome')
+        path: path.resolve(__dirname, '../build/firefox')
     },
     plugins: [
         new CopyPlugin({
@@ -29,7 +29,7 @@ module.exports = WebpackMerge(common, {
             }
         }),
         new webpack.DefinePlugin({
-            'PLATFORM': 'CHROME'
+            'PLATFORM': 'FIREFOX'
         })
     ]
 });

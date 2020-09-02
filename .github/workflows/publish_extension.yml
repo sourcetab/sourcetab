@@ -1,0 +1,53 @@
+name: Publish Extension
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [10.x, 12.x, 14.x]
+
+    steps:      
+    - uses: actions/checkout@v2
+    
+    - name: Use Node.js ${{ matrix.node-version }}
+      uses: actions/setup-node@v1
+      with:
+        node-version: ${{ matrix.node-version }}
+        
+    - name: Check if version has been updated
+      id: check
+      uses: EndBug/version-check@v1
+      with:
+        diff-search: true
+    
+    - run: npm ci
+      if: steps.check.outputs.changed == 'true'
+    
+    - run: npm run build-chrome
+      if: steps.check.outputs.changed == 'true'
+    
+    - run: npm run build-firefox
+      if: steps.check.outputs.changed == 'true'
+    
+    - run: 7z a chrome.zip ./build/chrome/*
+      if: steps.check.outputs.changed == 'true'
+    
+    - run: 7z a firefox.zip ./build/firefox/*
+      if: steps.check.outputs.changed == 'true'
+    
+    - uses: trmcnvn/chrome-addon@v2
+      if: steps.check.outputs.changed == 'true'
+      with:
+        extension: Web Launcher
+        zip: chrome.zip
+        client-id: ${{ secrets.CHROME_CLIENT_ID }}
+        client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+        refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}

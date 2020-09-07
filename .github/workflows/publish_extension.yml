@@ -41,7 +41,7 @@ jobs:
     - uses: trmcnvn/chrome-addon@v2
       if: steps.check.outputs.changed == 'true'
       with:
-        extension: Web Launcher
+        extension: akomlegpokabommpdjfmhnbdcnaefmdo
         zip: chrome.zip
         client-id: ${{ secrets.CHROME_CLIENT_ID }}
         client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}

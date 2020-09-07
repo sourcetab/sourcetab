@@ -29,7 +29,7 @@ module.exports = WebpackMerge(common, {
             }
         }),
         new webpack.DefinePlugin({
-            'PLATFORM': 'FIREFOX'
+            'PLATFORM': JSON.stringify('FIREFOX')
         })
     ]
 });

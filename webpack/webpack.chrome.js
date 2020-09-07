@@ -29,7 +29,7 @@ module.exports = WebpackMerge(common, {
             }
         }),
         new webpack.DefinePlugin({
-            'PLATFORM': 'CHROME'
+            'PLATFORM': JSON.stringify('CHROME')
         })
     ]
 });

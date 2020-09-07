@@ -1,6 +1,6 @@
 {
   "name": "web-launcher",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "",
   "scripts": {
     "build": "npm run build-web; npm run build-chrome;",

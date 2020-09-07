@@ -35,7 +35,7 @@ jobs:
     - run: 7z a chrome.zip ./build/chrome/*
       if: steps.check.outputs.changed == 'true'
     
-    - run: 7z a firefox.zip ./build/firefox/*
+    - run: 7z a firefox.xpi ./build/firefox/*
       if: steps.check.outputs.changed == 'true'
     
     - uses: trmcnvn/chrome-addon@v2
@@ -46,3 +46,11 @@ jobs:
         client-id: ${{ secrets.CHROME_CLIENT_ID }}
         client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
         refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+      
+    - uses: trmcnvn/firefox-addon@v1
+      with:
+        uuid: '{16acb437-3c59-4caf-a4b2-d79839cbf588}'
+        xpi: firefox.xpi
+        manifest: manifest.json
+        api-key: ${{ secrets.FIREFOX_JWT_ISSUER }}
+        api-secret: ${{ secrets.FIREFOX_JWT_SECRET }}

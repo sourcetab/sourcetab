@@ -6,9 +6,9 @@ A material design dashboard that replaces your new tab page and improves product
 
 Web Launcher is an extension for multiple browsers, and also has a demo you can look at before installing.
 
-| [Demo](https://jwr12135.github.io/web-launcher/) | [Chrome]() | [Firefox]() |
+| [Demo](https://jwr12135.github.io/web-launcher/) | [Chrome](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/) | [Firefox](https://addons.mozilla.org/en-US/firefox/addon/weblauncher/) |
 | :------------: | :------------: | :------------: |
-| [![Demo](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/icons/128.png "Demo")](https://jwr12135.github.io/web-launcher/ "Demo") | [![Chrome](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/chrome.png "Chrome")](http:// "Chrome") | [![Firefox](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/firefox.png "Firefox")](http:// "Firefox") |
+| [![Demo](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/icons/128.png "Demo")](https://jwr12135.github.io/web-launcher/ "Demo") | [![Chrome](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/chrome.png "Chrome")](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/ "Chrome") | [![Firefox](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/firefox.png "Firefox")](https://addons.mozilla.org/en-US/firefox/addon/weblauncher/ "Firefox") |
 
 ## Development
 

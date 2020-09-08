@@ -37,7 +37,11 @@
     color: #000;
 }
 
+#app-dialog-content {
+    padding-bottom: 0;
+}
 
 #app-dialog-content>label {
-    margin: 8px;
+    display: flex;
+    margin: 20px auto;
 }

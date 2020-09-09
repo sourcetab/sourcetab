@@ -26,9 +26,9 @@ module.exports = (() => {
     const buttonRipples = [].map.call(document.querySelectorAll('.mdc-button'), (el) => new MDCRipple(el));
     const textFields = [].map.call(document.querySelectorAll('.mdc-text-field'), (el) => new MDCTextField(el));
 
-    openDialog = (index = null) => {
+    openDialog = (index = undefined) => {
       $(dialog.root).attr('data-index', index);
-      if (index === null) {
+      if (index === undefined) {
         dialog.open();
       } else {
         data.get('apps', (result) => {
@@ -63,9 +63,12 @@ module.exports = (() => {
     });
     $(dialog.root).on('MDCDialog:closed', (e) => {
       if (e.detail.action === 'accept') {
-        if ($(dialog.root).attr('data-index') === null) {
+        console.log($(dialog.root).attr('data-index'));
+        if ($(dialog.root).attr('data-index') === undefined) {
+          console.log('Add');
           add($('#app-dialog-name').val(), $('#app-dialog-url').val(), $('#app-dialog-icon').val());
         } else {
+          console.log('Edit');
           remove($(dialog.root).attr('data-index'));
           add($('#app-dialog-name').val(), $('#app-dialog-url').val(), $('#app-dialog-icon').val());
         }

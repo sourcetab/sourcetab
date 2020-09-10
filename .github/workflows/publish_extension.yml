@@ -20,19 +20,33 @@ jobs:
         with:
           node-version: 12
 
-      - name: Check if version has been updated
+      - name: Check For Updated Version
         id: check
         uses: EndBug/version-check@v1
         with:
           diff-search: true
       
-      - name: Install packages
+      - name: Install Packages
         if: steps.check.outputs.changed == 'true'
         run: npm ci
       
-      - name: Build public files
+      - name: Build Public Files
         if: steps.check.outputs.changed == 'true'
         run: npm run build
+ 
+  publish_demo:
+    runs-on: ubuntu-latest
+    
+    needs: [build]
+    if: needs.build.outputs.update
+    
+    steps:
+    - name: Deploy to GitHub Pages
+      uses: Cecilapp/GitHub-Pages-deploy@master
+      env:
+        EMAIL: jwr12135@gmail.com
+        GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        BUILD_DIR: build/web
   
   publish_chrome:
     runs-on: ubuntu-latest

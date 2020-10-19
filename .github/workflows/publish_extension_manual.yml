@@ -29,16 +29,16 @@ jobs:
     needs: [build]
 
     steps:
+      - run: |
+          ls
+          ls ./build
+
       - name: Deploy to GitHub Pages
         uses: Cecilapp/GitHub-Pages-deploy@master
         env:
           EMAIL: jwr12135@gmail.com
           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BUILD_DIR: build/web
-
-      - run: |
-          ls
-          ls ./build
+          BUILD_DIR: ./build/web
 
   publish_chrome:
     runs-on: ubuntu-latest
@@ -53,7 +53,7 @@ jobs:
         uses: trmcnvn/chrome-addon@v2
         with:
           extension: akomlegpokabommpdjfmhnbdcnaefmdo
-          zip: chrome.zip
+          zip: ./chrome.zip
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
@@ -71,7 +71,7 @@ jobs:
         uses: trmcnvn/firefox-addon@v1
         with:
           uuid: '{16acb437-3c59-4caf-a4b2-d79839cbf588}'
-          xpi: firefox.xpi
+          xpi: ./firefox.xpi
           manifest: ./build/firefox/manifest.json
           api-key: ${{ secrets.FIREFOX_JWT_ISSUER }}
           api-secret: ${{ secrets.FIREFOX_JWT_SECRET }}

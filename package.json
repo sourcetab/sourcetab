@@ -3,7 +3,7 @@
   "version": "1.0.9",
   "description": "",
   "scripts": {
-    "build": "npm run build-web; npm run build-chrome;",
+    "build": "npm run build-web; npm run build-chrome; npm run build-firefox;",
     "build-chrome": "webpack --config ./webpack/webpack.chrome.js",
     "build-firefox": "webpack --config ./webpack/webpack.firefox.js",
     "build-web": "webpack --config ./webpack/webpack.web.js",

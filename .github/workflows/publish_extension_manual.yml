@@ -33,12 +33,12 @@ jobs:
           ls
           ls ./build
 
-      - name: Deploy to GitHub Pages
-        uses: Cecilapp/GitHub-Pages-deploy@master
-        env:
-          EMAIL: jwr12135@gmail.com
-          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BUILD_DIR: ./build/web
+#       - name: Deploy to GitHub Pages
+#         uses: Cecilapp/GitHub-Pages-deploy@master
+#         env:
+#           EMAIL: jwr12135@gmail.com
+#           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+#           BUILD_DIR: ./build/web
 
   publish_chrome:
     runs-on: ubuntu-latest

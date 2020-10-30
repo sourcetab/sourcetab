@@ -30,11 +30,14 @@ export default function WebsiteContainer({
 
   useEffect(() => {
     if (ver1Storage) {
+      console.log('ver1toWeb');
       setWebsites(ver1Storage.apps);
       setVer1Storage(null);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [ver1Storage]);
+
+  console.log('web', websites);
 
   return (
     <div>

@@ -17,14 +17,14 @@ export default function get(key, initialValue) {
 
       case 'CHROME': {
         chrome.storage.local.get(key, result => {
-          resolve(addDefault(result), initialValue);
+          resolve(addDefault(result[key]), initialValue);
         });
         break;
       }
 
       case 'FIREFOX': {
         browser.storage.local.get(key).then(result => {
-          resolve(addDefault(result), initialValue);
+          resolve(addDefault(result[key]), initialValue);
         });
         break;
       }

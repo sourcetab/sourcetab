@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Grid } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { ReactSortable } from 'react-sortablejs';
@@ -26,6 +26,15 @@ export default function WebsiteContainer({
 }) {
   const classes = useStyles();
   const [websites, setWebsites] = useStorage('websites', defaultWebsites);
+  const [ver1Storage, setVer1Storage] = useStorage('weblauncher');
+
+  useEffect(() => {
+    if (ver1Storage) {
+      setWebsites(ver1Storage.apps);
+      setVer1Storage(null);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [ver1Storage]);
 
   return (
     <div>

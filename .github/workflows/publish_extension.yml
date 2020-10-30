@@ -24,14 +24,6 @@ jobs:
         with:
           diff-search: true
 
-      - name: Install Packages
-        if: steps.check.outputs.changed == 'true'
-        run: npm ci
-
-      - name: Build Public Files
-        if: steps.check.outputs.changed == 'true'
-        run: npm run build
-
   publish_demo:
     runs-on: ubuntu-latest
 
@@ -39,12 +31,25 @@ jobs:
     if: needs.build.outputs.update
 
     steps:
-      - name: Deploy to GitHub Pages
-        uses: Cecilapp/GitHub-Pages-deploy@master
-        env:
-          EMAIL: jwr12135@gmail.com
-          GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-          BUILD_DIR: build/web
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12
+
+      - name: Install Packages
+        run: npm ci
+
+      - name: Build Public Files
+        run: npm run build:web
+
+      - name: Deploy to Github Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: build/web/ # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
 
   publish_chrome:
     runs-on: ubuntu-latest
@@ -53,6 +58,18 @@ jobs:
     if: needs.build.outputs.update
 
     steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12
+
+      - name: Install Packages
+        run: npm ci
+
+      - name: Build Public Files
+        run: npm run build:chrome
+
       - name: Compress Chrome Files
         run: 7z a chrome.zip ./build/chrome/*
 
@@ -72,6 +89,18 @@ jobs:
     if: needs.build.outputs.update
 
     steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12
+
+      - name: Install Packages
+        run: npm ci
+
+      - name: Build Public Files
+        run: npm run build:firefox
+
       - name: Compress Firefox Files
         run: 7z a firefox.xpi ./build/firefox/*
 

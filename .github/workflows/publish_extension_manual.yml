@@ -27,25 +27,48 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: [build]
+    if: needs.build.outputs.update
 
     steps:
-      - run: |
-          ls
-          ls ./build
+      - uses: actions/checkout@v2
 
-#       - name: Deploy to GitHub Pages
-#         uses: Cecilapp/GitHub-Pages-deploy@master
-#         env:
-#           EMAIL: jwr12135@gmail.com
-#           GH_TOKEN: ${{ secrets.ACCESS_TOKEN }}
-#           BUILD_DIR: ./build/web
+      - uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12
+
+      - name: Install Packages
+        run: npm ci
+
+      - name: Build Public Files
+        run: npm run build:web
+
+      - name: Deploy to Github Pages 🚀
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages # The branch the action should deploy to.
+          FOLDER: build/web/ # The folder the action should deploy.
+          CLEAN: true # Automatically remove deleted files from the deploy branch
 
   publish_chrome:
     runs-on: ubuntu-latest
 
     needs: [build]
+    if: needs.build.outputs.update
 
     steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12
+
+      - name: Install Packages
+        run: npm ci
+
+      - name: Build Public Files
+        run: npm run build:chrome
+
       - name: Compress Chrome Files
         run: 7z a chrome.zip ./build/chrome/*
 
@@ -53,7 +76,7 @@ jobs:
         uses: trmcnvn/chrome-addon@v2
         with:
           extension: akomlegpokabommpdjfmhnbdcnaefmdo
-          zip: ./chrome.zip
+          zip: chrome.zip
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
@@ -62,8 +85,21 @@ jobs:
     runs-on: ubuntu-latest
 
     needs: [build]
+    if: needs.build.outputs.update
 
     steps:
+      - uses: actions/checkout@v2
+
+      - uses: actions/setup-node@v2.1.2
+        with:
+          node-version: 12
+
+      - name: Install Packages
+        run: npm ci
+
+      - name: Build Public Files
+        run: npm run build:firefox
+
       - name: Compress Firefox Files
         run: 7z a firefox.xpi ./build/firefox/*
 
@@ -71,7 +107,7 @@ jobs:
         uses: trmcnvn/firefox-addon@v1
         with:
           uuid: '{16acb437-3c59-4caf-a4b2-d79839cbf588}'
-          xpi: ./firefox.xpi
+          xpi: firefox.xpi
           manifest: ./build/firefox/manifest.json
           api-key: ${{ secrets.FIREFOX_JWT_ISSUER }}
           api-secret: ${{ secrets.FIREFOX_JWT_SECRET }}

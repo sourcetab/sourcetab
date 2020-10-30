@@ -6,15 +6,15 @@ A material design dashboard that replaces your new tab page and improves product
 
 Web Launcher is an extension for multiple browsers, and also has a demo you can look at before installing.
 
-| [Demo](https://jwr12135.github.io/web-launcher/) | [Chrome](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/) | [Firefox](https://addons.mozilla.org/en-US/firefox/addon/weblauncher/) |
-| :------------: | :------------: | :------------: |
-| [![Demo](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/icons/128.png "Demo")](https://jwr12135.github.io/web-launcher/ "Demo") | [![Chrome](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/chrome.png "Chrome")](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/ "Chrome") | [![Firefox](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/firefox.png "Firefox")](https://addons.mozilla.org/en-US/firefox/addon/weblauncher/ "Firefox") |
+|                                                    [Demo](https://jwr12135.github.io/web-launcher/)                                                    |                                                    [Chrome](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/)                                                     |                                                      [Firefox](https://addons.mozilla.org/en-US/firefox/addon/weblauncher/)                                                      |
+| :----------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [![Demo](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/icons/128.png 'Demo')](https://jwr12135.github.io/web-launcher/ 'Demo') | [![Chrome](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/chrome.png 'Chrome')](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/ 'Chrome') | [![Firefox](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/firefox.png 'Firefox')](https://addons.mozilla.org/en-US/firefox/addon/weblauncher/ 'Firefox') |
 
 ## Development
 
 Nodejs and npm must be installed before starting.
 
-Install nessesary packages by running `npm ci` in the projects root directory.
+Install necessary packages by running `npm ci` in the projects root directory.
 
 ### Building
 
@@ -22,17 +22,17 @@ Web Launcher has several build scripts used for different platforms.
 
 #### Web
 
-To generate a build that runs directly in a browser, execute `npm run build-web` in the projects root directory.
+To generate a build that runs directly in a browser, execute `npm run build:web` in the projects root directory.
 Open **./build/web/index.html** in a browser to view results.
 
 #### Chrome
 
-To generate the chrome extension, execute `npm run build-chrome` in the projects root directory.
+To generate the chrome extension, execute `npm run build:chrome` in the projects root directory.
 The results are in the **./build/chrome** directory.
 
 #### Firefox
 
-To generate the firefox extension, execute `npm run build-firefox` in the projects root directory.
+To generate the firefox extension, execute `npm run build:firefox` in the projects root directory.
 The results are in the **./build/firefox** directory.
 
 ### Development
@@ -41,10 +41,10 @@ To start development execute `npm start` in the projects root directory. This wi
 
 ## Built With
 
-* [ESLint](https://eslint.org/) - Used to enforce a certain coding style and correct syntax.
-* [JQuery](https://jquery.com/) - Used to simplify dom manipulation and animations.
-* [Material Design](https://material.io/) - Used to create a smooth user interface.
-* [Webpack](https://webpack.js.org/) - Used to bundle modules into a browser ready format.
+- [ESLint](https://eslint.org/) - Used to enforce a certain coding style and correct syntax.
+- [JQuery](https://jquery.com/) - Used to simplify dom manipulation and animations.
+- [Material Design](https://material.io/) - Used to create a smooth user interface.
+- [Webpack](https://webpack.js.org/) - Used to bundle modules into a browser ready format.
 
 ## License
 

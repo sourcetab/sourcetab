@@ -1,55 +1,43 @@
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const CopyPlugin = require('copy-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const path = require('path');
 
 module.exports = {
-    entry: './src/js/main.js',
-    module: {
-        rules: [{
-                test: /\.scss$/,
-                use: [{
-                        loader: 'file-loader',
-                        options: {
-                            name: 'style-[contentHash].css',
-                        },
-                    },
-                    'extract-loader',
-                    'css-loader',
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            implementation: require('sass'),
-                            webpackImporter: false,
-                            sassOptions: {
-                                includePaths: ['./node_modules']
-                            },
-                        }
-                    }
-                ]
-            },
-            {
-                test: /\.html$/i,
-                loader: 'html-loader'
-            },
-            {
-                test: /\.(png|jpe?g|gif|svg)$/i,
-                use: [{
-                    loader: 'file-loader',
-                }, ],
-            },
-            {
-                test: /\.(woff|woff2|eot|ttf|otf)$/,
-                use: [
-                    'file-loader',
-                ],
-            }
-        ]
-    },
-    plugins: [
-        new CleanWebpackPlugin.CleanWebpackPlugin(),
-        new HtmlWebpackPlugin({
-            template: './src/index.html'
-        })
-    ]
+  entry: ['./src/js/index.js'],
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
+  module: {
+    rules: [
+      {
+        test: /\.js$/,
+        loader: 'babel-loader',
+        exclude: /node_modules/,
+      },
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+      {
+        test: /\.(png|jpe?g|gif|svg)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+        },
+      },
+      {
+        test: /\.(woff|woff2|eot|ttf|otf)$/,
+        loader: 'url-loader',
+        options: {
+          limit: 100000,
+        },
+      },
+    ],
+  },
+  plugins: [
+    new CleanWebpackPlugin.CleanWebpackPlugin(),
+    new HtmlWebpackPlugin({
+      template: './src/template.html',
+      inject: 'body',
+    }),
+  ],
 };

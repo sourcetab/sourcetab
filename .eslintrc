@@ -20,8 +20,7 @@
     "chrome": "readonly"
   },
   "rules": {
-    "import/no-extraneous-dependencies": ["off"],
-    "prettier/prettier": ["error"],
-    "react/prop-types": ["off"]
+    "prettier/prettier": "error",
+    "react/prop-types": "off"
   }
 }

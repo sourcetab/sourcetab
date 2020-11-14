@@ -22,17 +22,17 @@ Web Launcher has several build scripts used for different platforms.
 
 #### Web
 
-To build, run `npm run build:web` in the projects root directory. An **index.html** file will be generated in the **./build** directory. You can open that in a browser to view the product.
+To build, run `npm run build:web` in the projects root directory. An **index.html** file will be generated in the **./dist** directory. You can open that in a browser to view the product.
 
 #### Chrome
 
 To generate the chrome extension, run `npm run build:chrome` in the projects root directory.
-The results are in the **./build/chrome** directory.
+The results are in the **./dist/chrome** directory.
 
 #### Firefox
 
 To generate the firefox extension, run `npm run build:firefox` in the projects root directory.
-The results are in the **./build/firefox** directory.
+The results are in the **./dist/firefox** directory.
 
 ### Develop
 

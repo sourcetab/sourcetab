@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import {
   Button,
   Dialog,
@@ -6,6 +6,7 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  Typography,
 } from '@material-ui/core';
 
 export default function WebsiteDialog({
@@ -17,6 +18,7 @@ export default function WebsiteDialog({
   const [name, setName] = useState('');
   const [url, setUrl] = useState('');
   const [icon, setIcon] = useState('');
+  const [backgroundColor, setBackgroundColor] = useState('#ffffff');
 
   const [nameError, setNameError] = useState('');
   const [urlError, setUrlError] = useState('');
@@ -26,58 +28,36 @@ export default function WebsiteDialog({
     setWebsiteDialogIndex(undefined);
     setName('');
     setUrl('');
-    setIcon('');
+    setBackgroundColor('#ffffff');
   };
 
   const submit = e => {
     e.preventDefault();
-    let errors = 0;
 
-    if (name.length > 0) {
-      setNameError('');
+    if (websiteDialogIndex === null) {
+      setWebsites([
+        ...websites,
+        {
+          name,
+          url,
+          icon,
+          backgroundColor,
+        },
+      ]);
     } else {
-      errors += 1;
-      setNameError('Name must be filled.');
+      setWebsites([
+        ...websites.slice(0, websiteDialogIndex),
+        {
+          name,
+          url,
+          icon,
+          backgroundColor,
+        },
+        ...websites.slice(websiteDialogIndex + 1),
+      ]);
     }
 
-    if (url.length > 0) {
-      setUrlError('');
-    } else {
-      errors += 1;
-      setUrlError('URL must be filled.');
-    }
-
-    if (icon.length > 0) {
-      setIconError('');
-    } else {
-      errors += 1;
-      setIconError('Icon URL must be filled.');
-    }
-
-    if (errors === 0) {
-      if (websiteDialogIndex === null) {
-        setWebsites([
-          ...websites,
-          {
-            name,
-            url,
-            icon,
-          },
-        ]);
-      } else {
-        setWebsites([
-          ...websites.slice(0, websiteDialogIndex),
-          {
-            name,
-            url,
-            icon,
-          },
-          ...websites.slice(websiteDialogIndex + 1),
-        ]);
-      }
-
-      close();
-    }
+    close();
   };
 
   useEffect(() => {
@@ -85,6 +65,9 @@ export default function WebsiteDialog({
       setName(websites[websiteDialogIndex].name);
       setUrl(websites[websiteDialogIndex].url);
       setIcon(websites[websiteDialogIndex].icon);
+      if (websites[websiteDialogIndex].backgroundColor) {
+        setBackgroundColor(websites[websiteDialogIndex].backgroundColor);
+      }
     }
   }, [websiteDialogIndex, websites]);
 
@@ -129,6 +112,18 @@ export default function WebsiteDialog({
             value={icon}
             variant="outlined"
           />
+          <br />
+          <br />
+          <span>
+            <Typography>
+              Background Color:&nbsp;&nbsp;
+              <input
+                type="color"
+                value={backgroundColor}
+                onChange={e => setBackgroundColor(e.target.value)}
+              />
+            </Typography>
+          </span>
         </DialogContent>
         <DialogActions>
           <Button onClick={close} variant="outlined" color="primary">

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Background from './components/background/Background';
 import ToolBar from './components/toolbar/ToolBar';

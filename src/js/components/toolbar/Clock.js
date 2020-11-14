@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import useStorage from '../../hooks/useStorage';
 
 const zero = i => {

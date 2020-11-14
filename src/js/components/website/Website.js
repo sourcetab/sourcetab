@@ -1,4 +1,3 @@
-import React from 'react';
 import { Fade, Grid, IconButton, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Delete, Edit, FileCopy } from '@material-ui/icons';
@@ -82,10 +81,18 @@ export default function Website({
       </div>
 
       <svg className={classes.website_svg} width="125" viewBox="0 0 100 100">
-        <rect width="100" height="100" fill="#FFF" />
-        <image href={data.icon} height="100" width="100" />
+        <rect
+          width="100"
+          height="100"
+          fill={data.backgroundColor || '#ffffff'}
+        />
+        {data.icon ? <image href={data.icon} height="100" width="100" /> : ''}
       </svg>
-      <Typography className={classes.website_text}>{data.name}</Typography>
+      {data.name ? (
+        <Typography className={classes.website_text}>{data.name}</Typography>
+      ) : (
+        ''
+      )}
     </div>
   );
 
@@ -94,7 +101,10 @@ export default function Website({
       {editMode ? (
         <div className={classes.website_edit_mode}>{children}</div>
       ) : (
-        <a className={classes.website} href={data.url}>
+        <a
+          className={classes.website}
+          {...(data.url ? { href: data.url } : {})}
+        >
           {children}
         </a>
       )}

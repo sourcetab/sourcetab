@@ -5,9 +5,8 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import { Add, Edit } from '@material-ui/icons';
+import { Add, Close, Edit } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
-import React from 'react';
 import Clock from './Clock';
 
 const useStyles = makeStyles({
@@ -45,7 +44,7 @@ export default function ToolBar({
           }}
           color="inherit"
         >
-          <Edit />
+          {editMode ? <Close /> : <Edit />}
         </IconButton>
       </Toolbar>
     </AppBar>

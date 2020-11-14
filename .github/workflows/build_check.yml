@@ -8,9 +8,6 @@ jobs:
   check:
     runs-on: ubuntu-latest
 
-    outputs:
-      update: ${{ steps.check.outputs.changed }}
-
     steps:
       - uses: actions/checkout@v2
 

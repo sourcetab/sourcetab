@@ -20,14 +20,11 @@ export default function WebsiteDialog({
   const [icon, setIcon] = useState('');
   const [backgroundColor, setBackgroundColor] = useState('#ffffff');
 
-  const [nameError, setNameError] = useState('');
-  const [urlError, setUrlError] = useState('');
-  const [iconError, setIconError] = useState('');
-
   const close = () => {
     setWebsiteDialogIndex(undefined);
     setName('');
     setUrl('');
+    setIcon('');
     setBackgroundColor('#ffffff');
   };
 
@@ -80,8 +77,6 @@ export default function WebsiteDialog({
         <DialogContent>
           <TextField
             label="Name"
-            error={nameError.length > 0}
-            helperText={nameError}
             onChange={e => {
               setName(e.target.value);
             }}
@@ -92,8 +87,6 @@ export default function WebsiteDialog({
           <br />
           <TextField
             label="URL"
-            error={urlError.length > 0}
-            helperText={urlError}
             onChange={e => {
               setUrl(e.target.value);
             }}
@@ -104,8 +97,6 @@ export default function WebsiteDialog({
           <br />
           <TextField
             label="Icon URL"
-            error={iconError.length > 0}
-            helperText={iconError}
             onChange={e => {
               setIcon(e.target.value);
             }}

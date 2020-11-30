@@ -34,7 +34,7 @@
     "url-loader": "^4.1.0",
     "webpack": "^4.44.2",
     "webpack-cli": "^3.3.12",
-    "webpack-extension-manifest-plugin": "^0.5.0"
+    "webpack-extension-manifest-plugin": "^0.6.0"
   },
   "devDependencies": {
     "eslint": "^7.7.0",

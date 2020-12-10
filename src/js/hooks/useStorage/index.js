@@ -16,7 +16,9 @@ export default function useStorage(key, initialValue) {
 
   useEventListener('storageChange', e => {
     if (Object.keys(e.detail).includes(key)) {
-      setStoredValue(e.detail[key].newValue);
+      if (e.detail[key].newValue) {
+        setStoredValue(e.detail[key].newValue);
+      }
     }
   });
 

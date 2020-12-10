@@ -1,4 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
+import useEventListener from '@use-it/event-listener';
 import get from './get';
 import set from './set';
 
@@ -13,8 +14,17 @@ export default function useStorage(key, initialValue) {
     return initialValue;
   });
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(() => set(key, storedValue), [storedValue]);
+  useEventListener('storageChange', e => {
+    if (Object.keys(e.detail).includes(key)) {
+      setStoredValue(e.detail[key].newValue);
+    }
+  });
 
-  return [storedValue, setStoredValue];
+  return [
+    storedValue,
+    value => {
+      setStoredValue(value);
+      set(key, value);
+    },
+  ];
 }

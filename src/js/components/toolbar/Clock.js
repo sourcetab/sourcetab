@@ -7,13 +7,13 @@ const zero = i => {
 
 export default function Clock() {
   const [time, setTime] = useState('');
-  const [config] = useStorage('clockConfig', {
+  const [clockConfig] = useStorage('clockConfig', {
     render: true,
     renderSeconds: true,
     twentyFourHourFormat: false,
   });
 
-  const tick = () => {
+  const tick = config => {
     const date = new Date();
     let h = date.getHours();
     h -= !config.twentyFourHourFormat && h > 12 ? 12 : 0;
@@ -25,14 +25,21 @@ export default function Clock() {
     );
   };
 
+  // eslint-disable-next-line consistent-return
   useEffect(() => {
-    const interval = setInterval(() => tick(), 1000);
-    tick();
-    return () => {
-      clearInterval(interval);
-    };
+    if (clockConfig.render) {
+      const interval = setInterval(() => tick(clockConfig), 1000);
+      tick(clockConfig);
+      return () => {
+        clearInterval(interval);
+      };
+      // eslint-disable-next-line no-else-return
+    } else {
+      setTime('');
+    }
+
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [clockConfig]);
 
   return <span>{time}</span>;
 }

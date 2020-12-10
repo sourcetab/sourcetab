@@ -5,7 +5,7 @@ import {
   Toolbar,
   Typography,
 } from '@material-ui/core';
-import { Add, Close, Edit } from '@material-ui/icons';
+import { Add, Close, Edit, Settings } from '@material-ui/icons';
 import { makeStyles } from '@material-ui/core/styles';
 import Clock from './Clock';
 
@@ -19,6 +19,7 @@ export default function ToolBar({
   editMode,
   setEditMode,
   setWebsiteDialogIndex,
+  setSettings,
 }) {
   const classes = useStyles();
 
@@ -45,6 +46,14 @@ export default function ToolBar({
           color="inherit"
         >
           {editMode ? <Close /> : <Edit />}
+        </IconButton>
+        <IconButton
+          onClick={() => {
+            setSettings(true);
+          }}
+          color="inherit"
+        >
+          <Settings />
         </IconButton>
       </Toolbar>
     </AppBar>

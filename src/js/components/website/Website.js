@@ -6,6 +6,7 @@ const useStyles = makeStyles({
   website: {
     textDecoration: 'none',
   },
+
   website_edit_mode: {
     cursor: 'grab',
   },
@@ -18,15 +19,19 @@ const useStyles = makeStyles({
   website_text: {
     textAlign: 'center',
     color: '#000',
+    width: '125px',
+    wordWrap: 'break-word',
   },
 
   edit_div: {
     position: 'absolute',
   },
+
   edit_div_layer: {
     backgroundColor: '#0003',
     borderRadius: '8px 0px 8px',
   },
+
   edit_icons: {
     color: 'white',
   },
@@ -37,7 +42,6 @@ export default function Website({
   editMode,
   setWebsiteDialogIndex,
   websites,
-  setWebsites,
 }) {
   const classes = useStyles();
 
@@ -56,21 +60,14 @@ export default function Website({
               <Edit fontSize="inherit" />
             </IconButton>
             <IconButton
-              onClick={() => {
-                setWebsites([...websites, websites[data.i]]);
-              }}
+              onClick={() => websites.pushItem(websites.get[data.i])}
               size="small"
               classes={{ root: classes.edit_icons }}
             >
               <FileCopy fontSize="inherit" />
             </IconButton>
             <IconButton
-              onClick={() => {
-                setWebsites([
-                  ...websites.slice(0, data.i),
-                  ...websites.slice(data.i + 1),
-                ]);
-              }}
+              onClick={() => websites.removeItem(data.i)}
               size="small"
               classes={{ root: classes.edit_icons }}
             >

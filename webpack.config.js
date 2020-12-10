@@ -67,9 +67,6 @@ module.exports = env => {
         },
       ],
     },
-    node: {
-      global: false,
-    },
     plugins: [
       new CleanWebpackPlugin(),
       new webpack.DefinePlugin({

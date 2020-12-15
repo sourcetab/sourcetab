@@ -52,7 +52,7 @@ jobs:
           CLEAN: true
 
       - name: Compress Firefox Files
-        run: 7z a firefox.xpi dist/firefox/*
+        run: 7z a firefox.xpi ./dist/firefox/*
 
       - name: Publish to Firefox
         uses: trmcnvn/firefox-addon@v1
@@ -64,7 +64,7 @@ jobs:
           api-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
 
       - name: Compress Chrome Files
-        run: 7z a chrome.zip dist/chrome/*
+        run: 7z a chrome.zip ./dist/chrome/*
 
       - name: Publish to Chrome Webstore
         uses: trmcnvn/chrome-addon@v2

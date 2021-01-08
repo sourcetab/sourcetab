@@ -1,12 +1,13 @@
 import ReactDOM from 'react-dom';
+
+import { StorageProvider } from './hooks/useStorageSetup';
+
 import App from './App';
-import storageChangeListener from './storageChangeListener';
 import '../style.css';
-// import 'fontsource-roboto/300.css';
-// import 'fontsource-roboto/400.css';
-// import 'fontsource-roboto/500.css';
-// import 'fontsource-roboto/700.css';
 
-storageChangeListener();
-
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+  <StorageProvider>
+    <App />
+  </StorageProvider>,
+  document.getElementById('root')
+);

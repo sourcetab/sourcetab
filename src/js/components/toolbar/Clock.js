@@ -7,11 +7,7 @@ const zero = i => {
 
 export default function Clock() {
   const [time, setTime] = useState('');
-  const [clockConfig] = useStorage('clockConfig', {
-    render: true,
-    renderSeconds: true,
-    twentyFourHourFormat: false,
-  });
+  const [data] = useStorage();
 
   const tick = config => {
     const date = new Date();
@@ -27,9 +23,9 @@ export default function Clock() {
 
   // eslint-disable-next-line consistent-return
   useEffect(() => {
-    if (clockConfig.render) {
-      const interval = setInterval(() => tick(clockConfig), 1000);
-      tick(clockConfig);
+    if (data.clock.render) {
+      const interval = setInterval(() => tick(data.clock), 1000);
+      tick(data.clock);
       return () => {
         clearInterval(interval);
       };
@@ -39,7 +35,7 @@ export default function Clock() {
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [clockConfig]);
+  }, [data.clock]);
 
   return <span>{time}</span>;
 }

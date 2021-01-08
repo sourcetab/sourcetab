@@ -18,7 +18,8 @@ const useStyles = makeStyles({
 
   website_text: {
     textAlign: 'center',
-    color: '#000',
+    color: '#FFF',
+    textShadow: '0 0 5px #000',
     width: '125px',
     wordWrap: 'break-word',
   },
@@ -42,6 +43,7 @@ export default function Website({
   editMode,
   setWebsiteDialogIndex,
   websites,
+  dispatch,
 }) {
   const classes = useStyles();
 
@@ -60,7 +62,13 @@ export default function Website({
               <Edit fontSize="inherit" />
             </IconButton>
             <IconButton
-              onClick={() => websites.pushItem(websites.get[data.i])}
+              onClick={() =>
+                dispatch({
+                  type: 'push',
+                  path: 'websites',
+                  value: websites[data.i],
+                })
+              }
               size="small"
               classes={{ root: classes.edit_icons }}
             >

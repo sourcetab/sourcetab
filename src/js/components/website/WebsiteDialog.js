@@ -11,6 +11,7 @@ import {
 
 export default function WebsiteDialog({
   websites,
+  dispatch,
   websiteDialogIndex,
   setWebsiteDialogIndex,
 }) {
@@ -31,18 +32,27 @@ export default function WebsiteDialog({
     e.preventDefault();
 
     if (websiteDialogIndex === null) {
-      websites.pushItem({
-        name,
-        url,
-        icon,
-        backgroundColor,
+      dispatch({
+        type: 'push',
+        path: 'websites',
+        value: {
+          name,
+          url,
+          icon,
+          backgroundColor,
+        },
       });
     } else {
-      websites.setItem(websiteDialogIndex, {
-        name,
-        url,
-        icon,
-        backgroundColor,
+      dispatch({
+        type: 'set',
+        path: 'websites',
+        index: websiteDialogIndex,
+        value: {
+          name,
+          url,
+          icon,
+          backgroundColor,
+        },
       });
     }
 
@@ -51,11 +61,11 @@ export default function WebsiteDialog({
 
   useEffect(() => {
     if (typeof websiteDialogIndex === 'number') {
-      setName(websites.get[websiteDialogIndex].name);
-      setUrl(websites.get[websiteDialogIndex].url);
-      setIcon(websites.get[websiteDialogIndex].icon);
-      if (websites.get[websiteDialogIndex].backgroundColor) {
-        setBackgroundColor(websites.get[websiteDialogIndex].backgroundColor);
+      setName(websites[websiteDialogIndex].name);
+      setUrl(websites[websiteDialogIndex].url);
+      setIcon(websites[websiteDialogIndex].icon);
+      if (websites[websiteDialogIndex].backgroundColor) {
+        setBackgroundColor(websites[websiteDialogIndex].backgroundColor);
       }
     }
   }, [websiteDialogIndex, websites]);

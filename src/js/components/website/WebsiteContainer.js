@@ -3,11 +3,9 @@ import { makeStyles } from '@material-ui/core/styles';
 import { ReactSortable } from 'react-sortablejs';
 
 import useStorage from '../../hooks/useStorage';
-import useRichState from '../../hooks/useRichState';
 
 import Website from './Website';
 import WebsiteDialog from './WebsiteDialog';
-import defaultWebsites from './defaultWebsites';
 
 const useStyles = makeStyles(theme => ({
   websiteContainer: {
@@ -25,7 +23,7 @@ export default function WebsiteContainer({
   setWebsiteDialogIndex,
 }) {
   const classes = useStyles();
-  const websites = useRichState(useStorage('websites', defaultWebsites));
+  const [data, dispatch] = useStorage();
 
   return (
     <div>
@@ -37,24 +35,32 @@ export default function WebsiteContainer({
         {...(editMode
           ? {
               ghostClass: classes.ghost,
-              list: websites.get,
-              setList: websites.set,
+              list: data.websites,
+              setList: value => {
+                dispatch({ type: 'set', path: 'websites', value });
+              },
               animation: 150,
             }
           : {})}
       >
-        {websites.get.map((v, i) => (
+        {data.websites.map((v, i) => (
           <Website
             key={i}
             data={{ ...v, i }}
             style={classes}
-            {...{ editMode, setWebsiteDialogIndex, websites }}
+            {...{
+              editMode,
+              setWebsiteDialogIndex,
+              websites: data.websites,
+              dispatch,
+            }}
           />
         ))}
       </Grid>
       <WebsiteDialog
         {...{
-          websites,
+          websites: data.websites,
+          dispatch,
           websiteDialogIndex,
           setWebsiteDialogIndex,
         }}

@@ -1,6 +1,6 @@
 {
   "name": "web-launcher",
-  "version": "2.2.2",
+  "version": "2.3.0",
   "description": "",
   "scripts": {
     "analyze": "webpack --env analyze",
@@ -26,6 +26,7 @@
     "file-loader": "^6.0.0",
     "fontsource-roboto": "^3.1.5",
     "html-webpack-plugin": "^4.3.0",
+    "lodash": "^4.17.20",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-sortablejs": "^6.0.0",

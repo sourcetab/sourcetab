@@ -1,4 +1,5 @@
 import { makeStyles } from '@material-ui/core/styles';
+import useStorage from '../../hooks/useStorage';
 
 const useStyles = makeStyles({
   background: {
@@ -20,5 +21,12 @@ const useStyles = makeStyles({
 export default function Background() {
   const classes = useStyles();
 
-  return <div className={classes.background}></div>;
+  const [data] = useStorage();
+
+  return (
+    <div
+      className={classes.background}
+      style={{ backgroundImage: `url('${data.background.url}')` }}
+    ></div>
+  );
 }

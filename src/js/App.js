@@ -11,7 +11,7 @@ export default function App() {
   const [settings, setSettings] = useState(false);
 
   return (
-    <div>
+    <>
       <Background />
       <ToolBar
         {...{ editMode, setEditMode, setWebsiteDialogIndex, setSettings }}
@@ -20,6 +20,6 @@ export default function App() {
         {...{ editMode, websiteDialogIndex, setWebsiteDialogIndex }}
       />
       <SettingsDialog {...{ settings, setSettings }} />
-    </div>
+    </>
   );
 }

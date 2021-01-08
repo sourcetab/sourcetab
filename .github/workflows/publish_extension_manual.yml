@@ -24,7 +24,7 @@ jobs:
         with:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           BRANCH: gh-pages
-          FOLDER: dist/web/
+          FOLDER: ./dist/web/
           CLEAN: true
 
       - name: Compress Firefox Files
@@ -34,8 +34,8 @@ jobs:
         uses: trmcnvn/firefox-addon@v1
         with:
           uuid: '{16acb437-3c59-4caf-a4b2-d79839cbf588}'
-          xpi: firefox.xpi
-          manifest: dist/firefox/manifest.json
+          xpi: ./firefox.xpi
+          manifest: ./dist/firefox/manifest.json
           api-key: ${{ secrets.FIREFOX_JWT_ISSUER }}
           api-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
 
@@ -46,7 +46,7 @@ jobs:
         uses: trmcnvn/chrome-addon@v2
         with:
           extension: akomlegpokabommpdjfmhnbdcnaefmdo
-          zip: chrome.zip
+          zip: ./chrome.zip
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}

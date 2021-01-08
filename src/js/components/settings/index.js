@@ -4,6 +4,7 @@ import {
   IconButton,
   SvgIcon,
   Switch,
+  TextField,
   Typography,
 } from '@material-ui/core';
 import { version } from '../../../../package.json';
@@ -12,17 +13,10 @@ import DialogHeader from '../DialogHeader';
 import Section from './Section';
 import Input from './Input';
 
-const setConfig = (state, setState, key, value) =>
-  setState({ ...state, [key]: value });
-
 export default function SettingsDialog({ settings, setSettings }) {
   const close = () => setSettings(false);
 
-  const [clockConfig, setClockConfig] = useStorage('clockConfig', {
-    render: true,
-    renderSeconds: true,
-    twentyFourHourFormat: false,
-  });
+  const [data, dispatch] = useStorage();
 
   return (
     <Dialog open={settings} onClose={close}>
@@ -34,54 +28,74 @@ export default function SettingsDialog({ settings, setSettings }) {
             label="Clock"
             control={
               <Switch
-                checked={clockConfig.render}
+                checked={data.clock.render}
                 onChange={e =>
-                  setConfig(
-                    clockConfig,
-                    setClockConfig,
-                    'render',
-                    e.target.checked
-                  )
+                  dispatch({
+                    type: 'set',
+                    path: 'clock.render',
+                    value: e.target.checked,
+                  })
                 }
               />
             }
           />
 
           <Input
-            disabled={!clockConfig.render}
+            disabled={!data.clock.render}
             control={
               <Switch
-                checked={clockConfig.renderSeconds}
+                checked={data.clock.renderSeconds}
                 onChange={e =>
-                  setConfig(
-                    clockConfig,
-                    setClockConfig,
-                    'renderSeconds',
-                    e.target.checked
-                  )
+                  dispatch({
+                    type: 'set',
+                    path: 'clock.renderSeconds',
+                    value: e.target.checked,
+                  })
                 }
               />
             }
             label="Show seconds"
           />
           <Input
-            disabled={!clockConfig.render}
+            disabled={!data.clock.render}
             control={
               <Switch
-                checked={clockConfig.twentyFourHourFormat}
+                checked={data.clock.twentyFourHourFormat}
                 onChange={e =>
-                  setConfig(
-                    clockConfig,
-                    setClockConfig,
-                    'twentyFourHourFormat',
-                    e.target.checked
-                  )
+                  dispatch({
+                    type: 'set',
+                    path: 'clock.twentyFourHourFormat',
+                    value: e.target.checked,
+                  })
                 }
               />
             }
             label="24 hour format"
           />
         </Section>
+
+        <Section>
+          <Input header label="Background" />
+
+          <Input
+            control={
+              <TextField
+                label="url"
+                variant="outlined"
+                value={data.background.url}
+                onChange={e =>
+                  dispatch({
+                    type: 'set',
+                    path: 'background.url',
+                    value: e.target.value,
+                  })
+                }
+              />
+            }
+            label="Url"
+          />
+        </Section>
+
         <Section>
           <Input header label={`Web Launcher ${version}`} />
           <Typography paragraph>

@@ -75,7 +75,9 @@ export default function Website({
               <FileCopy fontSize="inherit" />
             </IconButton>
             <IconButton
-              onClick={() => websites.removeItem(data.i)}
+              onClick={() =>
+                dispatch({ type: 'remove', path: 'websites', index: data.i })
+              }
               size="small"
               classes={{ root: classes.edit_icons }}
             >

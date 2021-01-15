@@ -1,13 +1,17 @@
-import { cloneDeep, get, set } from 'lodash';
+import cloneDeep from 'lodash/cloneDeep';
+import get from 'lodash/get';
+import set from 'lodash/set';
 
 export default function storageReducer(state, setState) {
-  const dispatch = action => {
+  return action => {
     const value = action.path ? get(state, action.path) : state;
     const setValue = v => {
       if (action.path) {
         const newObject = cloneDeep(state);
         set(newObject, action.path, v);
         setState(newObject);
+      } else {
+        setState(action.value);
       }
     };
 
@@ -48,5 +52,4 @@ export default function storageReducer(state, setState) {
       }
     }
   };
-  return dispatch;
 }

@@ -1,6 +1,5 @@
 {
   "name": "Web Launcher",
-  "description": "A material design dashboard that replaces your new tab page and improves productivity.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

@@ -1,9 +1,7 @@
 import { useState, useEffect } from 'react';
 import useStorage from '../../hooks/useStorage';
 
-const zero = i => {
-  return i < 10 ? `0${i}` : i;
-};
+const zero = i => (i < 10 ? `0${i}` : i);
 
 export default function Clock() {
   const [time, setTime] = useState('');

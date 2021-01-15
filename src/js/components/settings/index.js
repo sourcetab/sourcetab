@@ -7,11 +7,12 @@ import {
   TextField,
   Typography,
 } from '@material-ui/core';
-import { version } from '../../../../package.json';
+import pkg from '../../../../package.json';
 import useStorage from '../../hooks/useStorage';
 import DialogHeader from '../DialogHeader';
 import Section from './Section';
 import Input from './Input';
+import DataSection from './sections/DataSection';
 
 export default function SettingsDialog({ settings, setSettings }) {
   const close = () => setSettings(false);
@@ -96,12 +97,11 @@ export default function SettingsDialog({ settings, setSettings }) {
           />
         </Section>
 
+        <DataSection />
+
         <Section>
-          <Input header label={`Web Launcher ${version}`} />
-          <Typography paragraph>
-            A material design dashboard that replaces your new tab page and
-            improves productivity.
-          </Typography>
+          <Input header label={`Web Launcher ${pkg.version}`} />
+          <Typography paragraph>{pkg.description}</Typography>
           <a
             href="https://github.com/jwr12135/web-launcher"
             style={{ textDecoration: 'none' }}

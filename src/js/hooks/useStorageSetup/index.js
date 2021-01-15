@@ -1,5 +1,5 @@
 import { createContext, useState, useEffect } from 'react';
-import { isEqual } from 'lodash';
+import isEqual from 'lodash/isEqual';
 import storageReducer from './storageReducer';
 import useStorageChangeListener from '../useStorageChangeListener';
 import getStoredData from './get';

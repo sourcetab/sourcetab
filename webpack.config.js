@@ -1,28 +1,35 @@
 const CopyPlugin = require('copy-webpack-plugin');
-const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const path = require('path');
 const webpack = require('webpack');
 const WebpackExtensionManifestPlugin = require('webpack-extension-manifest-plugin');
-const { version } = require('./package.json');
+const pkg = require('./package.json');
 const chromeManifest = require('./assets/manifest.json');
 
 module.exports = env => {
-  let platform = 'web';
   let mode = 'production';
+  let platform = 'web';
+  let isExtension = false;
 
-  switch (env) {
-    case 'analyze':
-      break;
-    case 'chrome':
-      platform = 'chrome';
+  switch (env.mode) {
+    case 'prod':
       break;
     case 'dev':
       mode = 'development';
       break;
+    default:
+      return undefined;
+  }
+
+  switch (env.platform) {
+    case 'chrome':
+      platform = 'chrome';
+      isExtension = true;
+      break;
     case 'firefox':
       platform = 'firefox';
+      isExtension = true;
       break;
     case 'web':
       break;
@@ -36,7 +43,6 @@ module.exports = env => {
       filename: '[name]-[contentHash].js',
       path: path.resolve(__dirname, `./dist/${platform}`),
     },
-    entry: ['./src/js/index.js'],
     resolve: {
       extensions: ['.js', '.jsx'],
     },
@@ -53,17 +59,14 @@ module.exports = env => {
         },
         {
           test: /\.(png|jpe?g|gif|svg)$/,
-          loader: 'url-loader',
+          loader: 'file-loader',
           options: {
             limit: 100000,
           },
         },
         {
           test: /\.(woff|woff2|eot|ttf|otf)$/,
-          loader: 'url-loader',
-          options: {
-            limit: 100000,
-          },
+          loader: 'file-loader',
         },
       ],
     },
@@ -76,8 +79,7 @@ module.exports = env => {
         template: './src/template.html',
         inject: 'body',
       }),
-      ...(env === 'analyze' ? [new BundleAnalyzerPlugin()] : []),
-      ...(env === 'chrome' || env === 'firefox'
+      ...(isExtension
         ? [
             new CopyPlugin({
               patterns: [
@@ -91,7 +93,8 @@ module.exports = env => {
               config: {
                 base: chromeManifest,
                 extend: {
-                  version,
+                  version: pkg.version,
+                  description: pkg.version,
                 },
               },
             }),

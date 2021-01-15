@@ -24,7 +24,7 @@ export default function ToolBar({
   const classes = useStyles();
 
   return (
-    <AppBar position="static">
+    <AppBar position="fixed">
       <Toolbar>
         <Typography classes={{ root: classes.time }} variant="h6">
           <Clock />

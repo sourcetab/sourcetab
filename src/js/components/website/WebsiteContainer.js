@@ -1,4 +1,4 @@
-import { Grid } from '@material-ui/core';
+import { Grid, Toolbar } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { ReactSortable } from 'react-sortablejs';
 
@@ -10,7 +10,8 @@ import WebsiteDialog from './WebsiteDialog';
 const useStyles = makeStyles(theme => ({
   websiteContainer: {
     width: '100%',
-    padding: theme.spacing(10),
+    margin: 0,
+    padding: theme.spacing(5),
   },
   ghost: {
     visibility: 'hidden',
@@ -27,6 +28,7 @@ export default function WebsiteContainer({
 
   return (
     <div>
+      <Toolbar />
       <Grid
         component={editMode ? ReactSortable : 'div'}
         classes={{ root: classes.websiteContainer }}
@@ -46,12 +48,11 @@ export default function WebsiteContainer({
         {data.websites.map((v, i) => (
           <Website
             key={i}
-            data={{ ...v, i }}
-            style={classes}
+            data={v}
+            index={i}
             {...{
               editMode,
               setWebsiteDialogIndex,
-              websites: data.websites,
               dispatch,
             }}
           />

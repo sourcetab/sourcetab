@@ -25,5 +25,10 @@
     "react/jsx-uses-react": "off",
     "react/react-in-jsx-scope": "off"
   },
-  "ignorePatterns": ["dist/"]
+  "ignorePatterns": ["dist/"],
+  "settings": {
+    "react": {
+      "version": "detect"
+    }
+  }
 }

@@ -1,5 +1,5 @@
 /* eslint-disable global-require */
-import { version } from '../../../../package.json';
+import pkg from '../../../../package.json';
 
 const imgs = {
   background: require('../../../images/beach.jpeg'),
@@ -12,7 +12,7 @@ const imgs = {
 
 export default {
   default: {
-    version,
+    version: pkg.version,
     background: { url: imgs.background.default },
     clock: {
       render: true,

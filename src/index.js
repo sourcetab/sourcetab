@@ -1,9 +1,9 @@
 import ReactDOM from 'react-dom';
 
-import { StorageProvider } from './hooks/useStorageSetup';
+import { StorageProvider } from './js/hooks/useStorageSetup';
 
-import App from './App';
-import '../style.css';
+import App from './js/App';
+import './style.css';
 
 ReactDOM.render(
   <StorageProvider>

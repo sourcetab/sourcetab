@@ -42,19 +42,19 @@ export default function Website({
   data,
   editMode,
   setWebsiteDialogIndex,
-  websites,
   dispatch,
+  index,
 }) {
   const classes = useStyles();
 
   const children = (
-    <div>
+    <>
       <div className={classes.edit_div}>
         <Fade in={editMode}>
           <div className={classes.edit_div_layer}>
             <IconButton
               onClick={() => {
-                setWebsiteDialogIndex(data.i);
+                setWebsiteDialogIndex(index);
               }}
               size="small"
               classes={{ root: classes.edit_icons }}
@@ -66,7 +66,7 @@ export default function Website({
                 dispatch({
                   type: 'push',
                   path: 'websites',
-                  value: websites[data.i],
+                  value: data,
                 })
               }
               size="small"
@@ -76,7 +76,7 @@ export default function Website({
             </IconButton>
             <IconButton
               onClick={() =>
-                dispatch({ type: 'remove', path: 'websites', index: data.i })
+                dispatch({ type: 'remove', path: 'websites', index })
               }
               size="small"
               classes={{ root: classes.edit_icons }}
@@ -100,7 +100,7 @@ export default function Website({
       ) : (
         ''
       )}
-    </div>
+    </>
   );
 
   return (

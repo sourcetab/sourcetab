@@ -40,7 +40,7 @@ module.exports = env => {
   return {
     mode,
     output: {
-      filename: '[name]-[contentHash].js',
+      filename: '[name]-[contenthash].js',
       path: path.resolve(__dirname, `./dist/${platform}`),
     },
     resolve: {
@@ -94,7 +94,7 @@ module.exports = env => {
                 base: chromeManifest,
                 extend: {
                   version: pkg.version,
-                  description: pkg.version,
+                  description: pkg.description,
                 },
               },
             }),

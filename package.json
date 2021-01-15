@@ -1,6 +1,6 @@
 {
   "name": "web-launcher",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "A material design dashboard that replaces your new tab page and improves productivity.",
   "scripts": {
     "dev": "webpack s --env mode=prod --env platform=web --open",

@@ -6,9 +6,9 @@ A material design dashboard that replaces your new tab page and improves product
 
 Web Launcher is an extension for multiple browsers, and also has a demo you can look at before installing.
 
-|                                                     [Demo](https://jwr12135.github.io/web-launcher/)                                                      |                                                    [Chrome](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/)                                                     |                                                      [Firefox](https://addons.mozilla.org/en-US/firefox/addon/weblauncher/)                                                      |
-| :-------------------------------------------------------------------------------------------------------------------------------------------------------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| [![Demo](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/icons/64.png 'Demo')](https://web-launcher.github.io/web-launcher/ 'Demo') | [![Chrome](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/chrome.png 'Chrome')](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/ 'Chrome') | [![Firefox](https://raw.githubusercontent.com/jwr12135/web-launcher/master/assets/firefox.png 'Firefox')](https://addons.mozilla.org/en-US/firefox/addon/weblauncher/ 'Firefox') |
+|                      [Demo](https://jwr12135.github.io/web-launcher/)                      |                     [Chrome](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/)                     |                  [Edge](https://microsoftedge.microsoft.com/addons/detail/web-launcher/fpknfiaimmgbbpplehjclidiphmhljeh)                  |                      [Firefox](https://addons.mozilla.org/en-US/firefox/addon/web-launcher/)                       |
+| :----------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------: | :---------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------: |
+| [![Demo](assets/icons/64.png 'Demo')](https://web-launcher.github.io/web-launcher/ 'Demo') | [![Chrome](assets/chrome.png 'Chrome')](https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo/ 'Chrome') | [![Edge](assets/edge.png 'Edge')](https://microsoftedge.microsoft.com/addons/detail/web-launcher/fpknfiaimmgbbpplehjclidiphmhljeh 'Edge') | [![Firefox](assets/firefox.png 'Firefox')](https://addons.mozilla.org/en-US/firefox/addon/web-launcher/ 'Firefox') |
 
 ## Development
 
@@ -36,7 +36,7 @@ The results are in the **./dist/firefox** directory.
 
 ### Develop
 
-To start development, run `npm start` in the project root directory. This will create a local server in which you can view the project from a browser. Any changes from the source files in the **./src** directory, will automatically reload the page.
+To start development, run `npm dev` in the project root directory. This will create a local server in which you can view the project from a browser. Any changes from the source files in the **./src** directory, will automatically reload the page.
 
 ## Built With
 

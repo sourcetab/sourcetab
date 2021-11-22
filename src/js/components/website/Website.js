@@ -1,4 +1,4 @@
-import { Fade, Grid, IconButton, Typography } from '@material-ui/core';
+import { Fade, IconButton, Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { Delete, Edit, FileCopy } from '@material-ui/icons';
 
@@ -103,18 +103,11 @@ export default function Website({
     </>
   );
 
-  return (
-    <Grid item>
-      {editMode ? (
-        <div className={classes.website_edit_mode}>{children}</div>
-      ) : (
-        <a
-          className={classes.website}
-          {...(data.url ? { href: data.url } : {})}
-        >
-          {children}
-        </a>
-      )}
-    </Grid>
+  return editMode ? (
+    <div className={classes.website_edit_mode}>{children}</div>
+  ) : (
+    <a className={classes.website} {...(data.url ? { href: data.url } : {})}>
+      {children}
+    </a>
   );
 }

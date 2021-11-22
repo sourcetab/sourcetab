@@ -2,7 +2,6 @@
 import pkg from '../../../../package.json';
 
 const imgs = {
-  background: require('../../../images/beach.jpeg'),
   amazon: require('../../../icons/amazon.png'),
   drive: require('../../../icons/drive.png'),
   gmail: require('../../../icons/gmail.png'),
@@ -12,8 +11,8 @@ const imgs = {
 
 export default {
   default: {
-    version: pkg.version,
-    background: { url: imgs.background.default },
+    ver: pkg.version,
+    background: { url: 'beach.jpg' },
     clock: {
       render: true,
       renderSeconds: true,

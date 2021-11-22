@@ -79,6 +79,14 @@ module.exports = env => {
         template: './src/template.html',
         inject: 'body',
       }),
+      new CopyPlugin({
+        patterns: [
+          {
+            from: './assets/beach.jpg',
+            to: './beach.jpg',
+          },
+        ],
+      }),
       ...(isExtension
         ? [
             new CopyPlugin({

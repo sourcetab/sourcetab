@@ -21,17 +21,34 @@ export const StorageProvider = props => {
 
   useEffect(() => {
     getStoredData().then(value => {
+      const finalize = newValue => {
+        if (
+          newValue.background.url.endsWith(
+            '3bbba8741b135f531008326a253e21c5.jpeg'
+          )
+        )
+          newValue.background.url = 'beach.jpg';
+
+        if (Object.prototype.hasOwnProperty.call(newValue, 'version')) {
+          delete newValue.version;
+        }
+
+        newValue.ver = data.default.ver;
+
+        setState(newValue);
+      };
+
       if (value) {
-        setState(value);
+        finalize(value);
       } else {
         getKey('websites').then(websites => {
           if (websites) {
             // migrate data from versions less then 2.3.0
-            setState({ ...data.default, websites });
             deleteKey('websites');
             deleteKey('clockConfig');
+            finalize({ ...data.default, websites });
           } else {
-            setState(data.default);
+            finalize(data.default);
           }
         });
       }

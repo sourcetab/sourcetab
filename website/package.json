@@ -1,0 +1,29 @@
+{
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && next export",
+    "deploy": "firebase deploy --only hosting:main",
+    "host": "npm run build && npm run export && npm run deploy"
+  },
+  "dependencies": {
+    "@emotion/cache": "^11.7.1",
+    "@emotion/react": "^11.9.0",
+    "@emotion/server": "^11.4.0",
+    "@emotion/styled": "^11.8.1",
+    "@fontsource/nunito": "^4.5.9",
+    "@fontsource/roboto": "^4.5.7",
+    "@mdx-js/loader": "^2.1.1",
+    "@mui/icons-material": "^5.8.0",
+    "@mui/material": "^5.8.0",
+    "@next/mdx": "^12.1.6",
+    "@types/node": "^17.0.34",
+    "@types/react": "^18.0.9",
+    "firebase": "^9.8.1",
+    "next": "^12.1.7-canary.19",
+    "react": "^18.1.0",
+    "react-dom": "^18.1.0",
+    "rehype-slug": "^5.0.1",
+    "typescript": "^4.6.4",
+    "webextension-store-meta": "^1.0.5"
+  }
+}

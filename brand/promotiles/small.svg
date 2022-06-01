@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 440 280">
+  <defs>
+    <style>
+      text {
+        font-family: Nunito;
+        fill: #fff;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="440" height="280" fill="#37474f" />
+  <circle id="icon" cx="220" cy="103" r="76" />
+  <!-- dy is 1/4 of font-size -->
+  <text x="220" y="225" dy="14" font-size="56" style="font-weight: bold">Web Launcher</text>
+</svg>

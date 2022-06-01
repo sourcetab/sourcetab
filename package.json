@@ -1,51 +1,103 @@
 {
   "name": "web-launcher",
-  "version": "2.4.2",
-  "description": "A material design dashboard that replaces your new tab page and improves productivity.",
+  "version": "3.0.0",
+  "description": "A material design dashboard for your new tab page.",
   "scripts": {
-    "dev": "webpack s --env mode=prod --env platform=web --open",
-    "dev:chrome": "webpack --env mode=dev --env platform=chrome --watch",
-    "dev:firefox": "webpack --env mode=dev --env platform=firefox --watch",
-    "build": "npm run build:web; npm run build:chrome; npm run build:firefox;",
-    "build:web": "webpack --env mode=prod --env platform=web",
-    "build:chrome": "webpack --env mode=prod --env platform=chrome",
-    "build:firefox": "webpack --env mode=prod --env platform=firefox",
-    "format": "prettier -w .",
-    "lint": "eslint --fix .",
-    "analyze": "webpack --env mode=prod --env platform=web --analyze"
+    "test": "xo",
+    "prepare": "husky install",
+    "build": "npm run build:web -w extension && npm run build -w website"
   },
+  "workspaces": [
+    "brand",
+    "extension",
+    "website"
+  ],
   "dependencies": {
-    "@babel/core": "^7.15.5",
-    "@babel/preset-env": "^7.15.6",
-    "@babel/preset-react": "^7.14.5",
-    "@material-ui/core": "^4.12.3",
-    "@material-ui/icons": "^4.11.2",
-    "babel-loader": "^8.2.2",
-    "clean-webpack-plugin": "^4.0.0",
-    "copy-webpack-plugin": "^9.0.1",
-    "css-loader": "^6.3.0",
-    "file-loader": "^6.2.0",
-    "html-webpack-plugin": "^5.3.2",
-    "lodash": "^4.17.21",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-sortablejs": "^6.0.0",
-    "sortablejs": "^1.14.0",
-    "style-loader": "^3.2.1",
-    "webpack": "^5.53.0",
-    "webpack-cli": "^4.8.0",
-    "webpack-extension-manifest-plugin": "^0.8.0"
+    "eslint-config-xo-react": "^0.27.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0",
+    "husky": "^7.0.4",
+    "lint-staged": "^12.4.1",
+    "xo": "^0.49.0"
   },
-  "devDependencies": {
-    "eslint": "^7.32.0",
-    "eslint-config-airbnb-base": "^14.2.1",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.24.2",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.25.3",
-    "eslint-plugin-react-hooks": "^4.2.0",
-    "prettier": "^2.4.1",
-    "webpack-bundle-analyzer": "^4.4.2",
-    "webpack-dev-server": "^4.2.1"
+  "lint-staged": {
+    "*.{js,ts,tsx}": "xo --fix",
+    "*": "prettier --ignore-unknown --write"
+  },
+  "prettier": {
+    "bracketSpacing": false,
+    "jsxSingleQuote": true,
+    "singleQuote": true,
+    "tabWidth": 2,
+    "trailingComma": "all"
+  },
+  "xo": {
+    "extends": "xo-react",
+    "prettier": true,
+    "space": 2,
+    "ignores": [
+      "website/next-env.d.ts"
+    ],
+    "rules": {
+      "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/naming-convention": "off",
+      "@typescript-eslint/no-confusing-void-expression": "off",
+      "@typescript-eslint/no-dynamic-delete": "off",
+      "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/padding-line-between-statements": "off",
+      "@typescript-eslint/prefer-nullish-coalescing": "off",
+      "capitalized-comments": "off",
+      "import/extensions": [
+        "error",
+        "never"
+      ],
+      "import/no-unassigned-import": "off",
+      "import/order": [
+        "error",
+        {
+          "pathGroups": [
+            {
+              "pattern": "@/**",
+              "group": "external",
+              "position": "after"
+            }
+          ],
+          "pathGroupsExcludedImportTypes": [
+            "builtin"
+          ]
+        }
+      ],
+      "max-depth": "off",
+      "react/function-component-definition": [
+        "error",
+        {
+          "namedComponents": "arrow-function",
+          "unnamedComponents": "arrow-function"
+        }
+      ],
+      "react-hooks/exhaustive-deps": "off",
+      "react/jsx-no-useless-fragment": "off",
+      "react/jsx-sort-props": [
+        "error",
+        {
+          "multiline": "last",
+          "shorthandFirst": true
+        }
+      ],
+      "react/prop-types": "off",
+      "react/react-in-jsx-scope": "off",
+      "react/require-default-props": "off",
+      "unicorn/filename-case": [
+        "error",
+        {
+          "cases": {
+            "camelCase": true,
+            "pascalCase": true
+          }
+        }
+      ],
+      "unicorn/prefer-node-protocol": "off",
+      "unicorn/prevent-abbreviations": "off"
+    }
   }
 }

@@ -1,0 +1,9 @@
+{
+  "scripts": {
+    "gen-imgs": "node ./scripts/genImgs.mjs"
+  },
+  "dependencies": {
+    "@xmldom/xmldom": "^0.7.5",
+    "sharp": "^0.29.3"
+  }
+}

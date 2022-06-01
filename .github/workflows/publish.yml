@@ -1,0 +1,58 @@
+name: Publish
+on:
+  release:
+    types: [published]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci && npm run build && npm test
+  publish-website-and-demo:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - run: npm ci && npm run build
+      - uses: FirebaseExtended/action-hosting-deploy@v0
+        with:
+          repoToken: '${{ secrets.GITHUB_TOKEN }}'
+          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WEB_LAUNCHER_DB }}'
+          channelId: live
+          projectId: web-launcher-db
+  publish-chrome:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci && npm run build:chrome -w extension
+      - run: 7z a chrome.zip ./extension/dist/chrome/*
+      - uses: trmcnvn/chrome-addon@v2
+        with:
+          extension: akomlegpokabommpdjfmhnbdcnaefmdo
+          zip: extension/dist/chrome.zip
+          client-id: ${{ secrets.CHROME_CLIENT_ID }}
+          client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
+          refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
+  publish-firefox:
+    needs: [test]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
+      - run: npm ci && npm run build:firefox -w extension
+      - uses: trmcnvn/firefox-addon@v1
+        with:
+          uuid: '{16acb437-3c59-4caf-a4b2-d79839cbf588}'
+          xpi: extension/dist/firefox.xpi
+          manifest: extension/dist/firefox/manifest.json
+          api-key: ${{ secrets.FIREFOX_JWT_ISSUER }}
+          api-secret: ${{ secrets.FIREFOX_JWT_SECRET }}

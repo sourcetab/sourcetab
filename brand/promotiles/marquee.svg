@@ -1,0 +1,21 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1400 560">
+  <defs>
+    <style>
+      text {
+        font-family: Nunito;
+        fill: #fff;
+        text-anchor: middle;
+      }
+    </style>
+  </defs>
+  <rect x="0" y="0" width="1400" height="560" fill="#37474f" />
+  <circle id="icon" cx="280" cy="280" r="168" />
+  <!-- dy is 1/4 of font-size -->
+  <text x="896" y="226" dy="30" font-size="120" style="font-weight: bold">
+    Web Launcher
+  </text>
+  <!-- dy is 1/4 of font-size -->
+  <text x="896" y="364" dy="20" font-size="80">
+    new tab dashboard
+  </text>
+</svg>

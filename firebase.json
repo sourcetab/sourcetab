@@ -1,0 +1,12 @@
+{
+  "hosting": [
+    {
+      "target": "extension",
+      "public": "extension/dist/web"
+    },
+    {
+      "target": "website",
+      "public": "website/out"
+    }
+  ]
+}

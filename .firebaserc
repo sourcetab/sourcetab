@@ -1,0 +1,17 @@
+{
+  "projects": {
+    "default": "web-launcher-db"
+  },
+  "targets": {
+    "web-launcher-db": {
+      "hosting": {
+        "website": [
+          "web-launcher-db"
+        ],
+        "extension": [
+          "web-launcher-db-demo"
+        ]
+      }
+    }
+  }
+}

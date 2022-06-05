@@ -1,5 +1,6 @@
 import {Buffer} from 'buffer';
 import {rmSync, mkdirSync, readFileSync, readdirSync} from 'fs';
+import path from 'path';
 import sharp from 'sharp';
 import {DOMParser, XMLSerializer} from '@xmldom/xmldom';
 
@@ -7,7 +8,7 @@ const domParser = new DOMParser();
 const xmlToString = new XMLSerializer().serializeToString;
 
 // Clear directories
-for (const dir of ['./icons/png', './promotiles/png']) {
+for (const dir of ['./icons/png', './promotiles/png', './screenshots/small']) {
   rmSync(dir, {recursive: true, force: true});
   mkdirSync(dir);
 }
@@ -58,4 +59,14 @@ for (const size of readdirSync('promotiles')
   sharp(Buffer.from(xmlToString(doc)))
     .png()
     .toFile(`./promotiles/png/${size}.png`);
+}
+
+// Generate screenshots
+for (const file of readdirSync('screenshots')
+  .map((v) => v.match(/^(.*).png$/)?.[1])
+  .filter(Boolean)) {
+  sharp(path.resolve(`screenshots`, `${file}.png`))
+    .resize(640, 400)
+    .webp()
+    .toFile(`./screenshots/small/${file}.webp`);
 }

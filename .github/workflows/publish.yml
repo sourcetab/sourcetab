@@ -16,6 +16,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 16
       - run: npm ci && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
@@ -32,7 +35,6 @@ jobs:
         with:
           node-version: 16
       - run: npm ci && npm run build:chrome -w extension
-      - run: 7z a chrome.zip ./extension/dist/chrome/*
       - uses: trmcnvn/chrome-addon@v2
         with:
           extension: akomlegpokabommpdjfmhnbdcnaefmdo

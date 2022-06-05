@@ -14,4 +14,4 @@ Either hides the date or shows it in short, long, or ISO format.
 
 ### Format
 
-Sets the clock to show a customized format. See [here](https://github.com/jwr12135/date-form#expressdate-reference) for more details on using the formatter. Any format specified here ignores the above options.
+Sets the clock to show a customized format. See [here](https://github.com/jwr12135/date-form#expressdate-reference) for more details on using the formatter. If the format is specified here, the clock ignores the above formatting options.

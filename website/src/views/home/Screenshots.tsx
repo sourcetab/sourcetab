@@ -4,10 +4,10 @@ import {
 } from '@mui/icons-material';
 import {Box, Button, MobileStepper, Paper, Stack} from '@mui/material';
 import {useEffect, useState} from 'react';
-import screenshot1 from '../../../../brand/screenshots/screenshot1.png';
-import screenshot2 from '../../../../brand/screenshots/screenshot2.png';
-import screenshot3 from '../../../../brand/screenshots/screenshot3.png';
-import screenshot4 from '../../../../brand/screenshots/screenshot4.png';
+import screenshot1 from '../../../../brand/screenshots/small/screenshot1.webp';
+import screenshot2 from '../../../../brand/screenshots/small/screenshot2.webp';
+import screenshot3 from '../../../../brand/screenshots/small/screenshot3.webp';
+import screenshot4 from '../../../../brand/screenshots/small/screenshot4.webp';
 
 const images = [screenshot1, screenshot2, screenshot3, screenshot4];
 
@@ -50,7 +50,7 @@ const Screenshots: FC = () => {
 
   return (
     <Stack alignItems='center'>
-      <Box sx={{width: '75vw', maxWidth: 750}}>
+      <Box sx={{width: '75vw', maxWidth: 640}}>
         <Paper elevation={4} sx={{position: 'relative', pt: '62.5%'}}>
           {images.map((step, index) => (
             <Box

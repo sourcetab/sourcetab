@@ -63,7 +63,7 @@ const WidgetsDialog: FC<{
                   <Typography gutterBottom component='div' variant='h6'>
                     {widget.name}
                   </Typography>
-                  <Box>
+                  <Box sx={{width: '118px', height: '118px'}}>
                     {/* @ts-expect-error */}
                     <widget.Widget
                       disable

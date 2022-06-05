@@ -7,6 +7,8 @@ import {
   Toolbar,
 } from '@mui/material';
 import {Fragment} from 'react';
+import Head from 'next/head';
+import {useRouter} from 'next/router';
 import ListItemButtonLink from '@/components/ListItemButtonLink';
 import docsConfig from '@/docsConfig';
 
@@ -50,27 +52,60 @@ const docsNavGen = (() => {
   );
 })();
 
-const DocsLayout: FC = ({children}) => (
-  <Box>
-    <Box style={{display: 'flex'}} sx={{display: 'flex'}}>
-      <Drawer
-        variant='permanent'
-        sx={{
-          width: drawerWidth,
-          flexShrink: 0,
-          [`& .MuiDrawer-paper`]: {width: drawerWidth, boxSizing: 'border-box'},
-        }}
-      >
-        <Toolbar />
-        <Box sx={{overflow: 'auto'}}>{docsNavGen}</Box>
-      </Drawer>
-      <Box
-        sx={{flexGrow: 1, m: '24px', display: 'flex', justifyContent: 'center'}}
-      >
-        <Box sx={{maxWidth: '900px', flexGrow: 1}}>{children}</Box>
+const titleGen = (
+  paths: string[],
+  config = docsConfig,
+  current = 'Web Launcher | Docs',
+): string => {
+  if (paths.length > 0) {
+    const path = paths.shift();
+    const fConfig = config.find((v) => v.path === path)!;
+    current += ` | ${fConfig.name}`;
+
+    return titleGen(paths, fConfig.children, current);
+  }
+
+  return current;
+};
+
+const DocsLayout: FC = ({children}) => {
+  const {pathname} = useRouter();
+
+  return (
+    <>
+      <Head>
+        <title>{titleGen(pathname.split('/').splice(2))}</title>
+      </Head>
+      <Box>
+        <Box style={{display: 'flex'}} sx={{display: 'flex'}}>
+          <Drawer
+            variant='permanent'
+            sx={{
+              width: drawerWidth,
+              flexShrink: 0,
+              [`& .MuiDrawer-paper`]: {
+                width: drawerWidth,
+                boxSizing: 'border-box',
+              },
+            }}
+          >
+            <Toolbar />
+            <Box sx={{overflow: 'auto'}}>{docsNavGen}</Box>
+          </Drawer>
+          <Box
+            sx={{
+              flexGrow: 1,
+              m: '24px',
+              display: 'flex',
+              justifyContent: 'center',
+            }}
+          >
+            <Box sx={{maxWidth: '900px', flexGrow: 1}}>{children}</Box>
+          </Box>
+        </Box>
       </Box>
-    </Box>
-  </Box>
-);
+    </>
+  );
+};
 
 export default DocsLayout;

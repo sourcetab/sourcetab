@@ -1,9 +1,7 @@
 {
   "scripts": {
     "dev": "next dev",
-    "build": "next build && next export",
-    "deploy": "firebase deploy --only hosting:main",
-    "host": "npm run build && npm run export && npm run deploy"
+    "build": "next build && next export"
   },
   "dependencies": {
     "@emotion/cache": "^11.7.1",
@@ -19,7 +17,7 @@
     "@types/node": "^17.0.34",
     "@types/react": "^18.0.9",
     "firebase": "^9.8.1",
-    "next": "^12.1.7-canary.19",
+    "next": "^12.1.7-canary.29",
     "react": "^18.1.0",
     "react-dom": "^18.1.0",
     "rehype-slug": "^5.0.1",

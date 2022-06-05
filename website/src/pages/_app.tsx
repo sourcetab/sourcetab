@@ -15,7 +15,6 @@ import DocsLayout from '@/views/DocsLayout';
 import createEmotionCache from '../createEmotionCache';
 import '@/firebase';
 
-// Client-side cache, shared for the whole session of the user in the browser.
 const clientSideEmotionCache = createEmotionCache();
 
 interface CustomAppProps extends AppProps {
@@ -31,19 +30,23 @@ const App: FC<CustomAppProps> = ({
   <CacheProvider value={emotionCache}>
     <Head>
       <meta content='initial-scale=1, width=device-width' name='viewport' />
-      <link href='favicon.png' rel='shortcut icon' type='image/png' />
+      <link href='/favicon.png' rel='shortcut icon' type='image/png' />
     </Head>
-    <ThemeProvider theme={theme}>
-      <CssBaseline />
-      <Header />
-      {router.asPath.startsWith('/docs') ? (
-        <DocsLayout>
+    {router.pathname === '/_error' ? (
+      <Component {...pageProps} />
+    ) : (
+      <ThemeProvider theme={theme}>
+        <CssBaseline />
+        <Header />
+        {router.pathname.startsWith('/docs') ? (
+          <DocsLayout>
+            <Component {...pageProps} />
+          </DocsLayout>
+        ) : (
           <Component {...pageProps} />
-        </DocsLayout>
-      ) : (
-        <Component {...pageProps} />
-      )}
-    </ThemeProvider>
+        )}
+      </ThemeProvider>
+    )}
   </CacheProvider>
 );
 

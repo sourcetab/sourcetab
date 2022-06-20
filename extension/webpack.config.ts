@@ -140,7 +140,13 @@ const config = async (
         }),
         // eslint-disable-next-line new-cap
         WebExtPlugin({
-          manifest: ['./assets/manifest.json', {version: pkg.version}],
+          manifest: [
+            './assets/manifest.json',
+            {
+              version: pkg.version,
+              manifest_version: platform === 'firefox' ? 2 : 3,
+            },
+          ],
         }),
         ...isProd([
           new ZipPlugin({

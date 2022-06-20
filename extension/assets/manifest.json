@@ -15,6 +15,5 @@
     "300": "./icons/300.png",
     "500": "./icons/500.png"
   },
-  "manifest_version": 3,
   "permissions": ["storage"]
 }

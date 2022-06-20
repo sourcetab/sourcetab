@@ -234,14 +234,7 @@ export const SortableWidgetContext: FC = ({children}) => {
           <WidgetItem
             editMode
             id={itemId}
-            inToolbar={
-              // console.log(
-              //   itemId,
-              //   data.widgets.d.c!,
-              //   data.widgets.d.c!.includes(itemId),
-              // ) ||
-              !data.widgets.d.c!.includes(itemId)
-            }
+            inToolbar={!data.widgets.d.c!.includes(itemId)}
           />
         )}
       </DragOverlay>

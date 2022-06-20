@@ -33,6 +33,10 @@ const docsConfig: import('./views/DocsLayout').DocsConfig = [
         name: 'Clock',
         path: 'clock',
       },
+      {
+        name: 'Note',
+        path: 'note',
+      },
     ],
   },
   {

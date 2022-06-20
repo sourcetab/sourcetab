@@ -16,7 +16,7 @@ const timeFormatMap = {
 
 const clock: Widget<{
   time: '12' | '24';
-  seconds: true;
+  seconds: boolean;
   date: 'none' | 'long' | 'short' | 'iso';
   format: string;
 }> = {
@@ -68,6 +68,11 @@ const clock: Widget<{
             short: 'Short',
             iso: 'ISO',
           }}
+        />
+        <Inputs.Switch
+          label='Show Seconds'
+          onChange={(newValue) => setData({...data, seconds: newValue})}
+          value={data.seconds}
         />
         <Inputs.Text
           label='Format'

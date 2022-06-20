@@ -1,6 +1,7 @@
 {
+  "type": "module",
   "scripts": {
-    "gen-imgs": "node ./scripts/genImgs.mjs"
+    "gen-imgs": "node ./scripts/genImgs.js"
   },
   "dependencies": {
     "@xmldom/xmldom": "^0.7.5",

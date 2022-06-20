@@ -2,11 +2,26 @@
   "hosting": [
     {
       "target": "extension",
-      "public": "extension/dist/web"
+      "public": "extension/dist/web",
+      "cleanUrls": true,
+      "trailingSlash": true
     },
     {
       "target": "website",
-      "public": "website/out"
+      "public": "website/out",
+      "cleanUrls": true,
+      "trailingSlash": true,
+      "headers": [
+        {
+          "source": "/_next/static/**",
+          "headers": [
+            {
+              "key": "Cache-Control",
+              "value": "public,max-age=31536000,immutable"
+            }
+          ]
+        }
+      ]
     }
   ]
 }

@@ -72,7 +72,6 @@ const WidgetEditDialog: FC<{
                 setData={setCurrentWidgetData}
                 setGlobalData={(newValue) => {
                   setData((data) => {
-                    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                     data.settings.widgets[data.widgets[editDialog].t] =
                       newValue;
                   });

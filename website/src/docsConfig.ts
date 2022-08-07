@@ -34,6 +34,10 @@ const docsConfig: import('./views/DocsLayout').DocsConfig = [
         path: 'clock',
       },
       {
+        name: 'IFrame',
+        path: 'iframe',
+      },
+      {
         name: 'Note',
         path: 'note',
       },

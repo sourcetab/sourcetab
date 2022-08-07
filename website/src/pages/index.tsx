@@ -7,6 +7,8 @@ import getExtensionStatsData, {
   ExtensionStatsData,
 } from '@/getExtensionStatsData';
 import Screenshots from '@/views/home/Screenshots';
+import Install from '@/views/home/Install';
+import Features from '../views/home/Features.mdx';
 
 interface HomeProps {
   extensionStatsData: ExtensionStatsData;
@@ -24,7 +26,7 @@ const Home: NextPage<HomeProps> = ({extensionStatsData}) => {
           name='description'
         />
       </Head>
-      <Box sx={{m: '10vh 16px', textAlign: 'center'}}>
+      <Box sx={{m: '10vh 16px 32px', textAlign: 'center'}}>
         <Box
           component='h1'
           sx={{fontFamily: 'Nunito, sans-serif', fontWeight: '800'}}
@@ -36,10 +38,22 @@ const Home: NextPage<HomeProps> = ({extensionStatsData}) => {
           <br />
           customizable with a variety of widgets and settings.
         </Typography>
+
         <Stack alignItems='center'>
-          <Divider sx={{m: '4vh', width: '100%', maxWidth: '600px'}} />
+          <Divider sx={{m: '32px', width: '100%', maxWidth: '600px'}} />
         </Stack>
+
+        <Stack alignItems='center'>
+          <Install />
+        </Stack>
+
         <ExtensionStats {...extensionStatsData} />
+
+        <Stack alignItems='center'>
+          <Typography component='div' textAlign='left'>
+            <Features />
+          </Typography>
+        </Stack>
       </Box>
 
       <Screenshots />

@@ -21,3 +21,11 @@ You should be familiar with the following used in Web Launcher:
 - [TypeScript](https://www.typescriptlang.org)
 - [React](https://reactjs.org)
 - [MUI](https://mui.com)
+
+## Setup
+
+Before compiling, make sure to install the dependencies by running `npm i` in the root of this repository. Doing so will also install dependencies for all workspaces.
+
+## Compilation
+
+Within the `extension` directory, you can run `npm run dev` to start up a development server with the web version, which should automatically open in your browser. Alternatively, run `npm run build:web` to compile the static files for the web version, which will output to the `dist/web` directory.

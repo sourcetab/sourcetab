@@ -23,7 +23,6 @@ export default function genDefaultData(genWidgets = true): StorageObject {
   const globalWidgetSettings: StorageObject['settings']['widgets'] = {};
 
   for (const widget of Object.keys(widgets)) {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     globalWidgetSettings[widget] = widgets[widget].defaultGlobalData;
   }
 

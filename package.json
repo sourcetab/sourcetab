@@ -1,6 +1,6 @@
 {
   "name": "web-launcher",
-  "version": "3.1.0",
+  "version": "3.2.0",
   "description": "A material design dashboard for your new tab page.",
   "scripts": {
     "test": "xo",
@@ -44,6 +44,7 @@
       "@typescript-eslint/no-confusing-void-expression": "off",
       "@typescript-eslint/no-dynamic-delete": "off",
       "@typescript-eslint/no-floating-promises": "off",
+      "@typescript-eslint/no-unsafe-assignment": "off",
       "@typescript-eslint/padding-line-between-statements": "off",
       "@typescript-eslint/prefer-nullish-coalescing": "off",
       "capitalized-comments": "off",

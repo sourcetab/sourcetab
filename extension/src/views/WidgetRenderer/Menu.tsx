@@ -37,7 +37,7 @@ const Menu = forwardRef<
 
     return (
       <>
-        <Box ref={ref} {...props}>
+        <Box ref={ref} {...props} sx={{margin: '0 4px'}}>
           <IconButton
             color='inherit'
             onClick={() => setOpen(true)}

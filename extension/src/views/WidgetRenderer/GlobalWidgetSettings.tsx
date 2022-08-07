@@ -33,7 +33,6 @@ const GlobalWidgetSettings: FC<{id: string}> = ({id}) => {
             data={data.settings.widgets[id]}
             setData={(newValue) => {
               setData((data) => {
-                // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
                 data.settings.widgets[id] = newValue;
               });
             }}

@@ -9,9 +9,11 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
+  FormControlLabel,
   List,
+  Radio,
+  RadioGroup,
   Snackbar,
 } from '@mui/material';
 import {useState} from 'react';
@@ -25,14 +27,20 @@ import parseStorageData from '@/hooks/useStorage/parseStorageData';
 const DataSettings: FC = () => {
   const [data, setData] = useStorage();
   const [restoreDataFile, setRestoreDataFile] = useState<StorageObject>();
-  const [confirmDialog, setConfirmDialog] = useState(false);
-  const [confirmType, setConfirmType] = useState<0 | 1>(0);
+  const [confirmOpen, setConfirmOpen] = useState(false);
+  const [confirmType, setConfirmType] = useState<'restore' | 'reset'>();
   const [snackbarData, setSnackbarData] = useState<StorageObject>();
   const [dataError, setDataError] = useState(false);
 
-  const closeConfirmDialog = () => setConfirmDialog(false);
+  const [method, setMethod] = useState<'replace' | 'merge'>('replace');
+  const [widgets, setWidgets] = useState(true);
+  const [settings, setSettings] = useState(true);
 
-  const closeDataError = () => setDataError(false);
+  const openConfirmDialog = (type: 'restore' | 'reset') => {
+    setConfirmType(type);
+    setConfirmOpen(true);
+  };
+  const closeConfirmDialog = () => setConfirmOpen(false);
 
   return (
     <List>
@@ -40,11 +48,11 @@ const DataSettings: FC = () => {
         icon={<DownloadIcon />}
         label='Backup Data'
         onClick={() => {
-          const time = new Date();
+          const d = new Date();
           downloadJson(
-            `weblauncher-${time.getFullYear()}-${
-              time.getMonth() + 1
-            }-${time.getDate()}-${time.getHours()}-${time.getMinutes()}-${time.getSeconds()}.json`,
+            `weblauncher-${d.getFullYear()}-${
+              d.getMonth() + 1
+            }-${d.getDate()}-${d.getHours()}-${d.getMinutes()}-${d.getSeconds()}.json`,
             data,
           );
         }}
@@ -61,8 +69,7 @@ const DataSettings: FC = () => {
 
             if (newData) {
               setRestoreDataFile(newData);
-              setConfirmType(0);
-              setConfirmDialog(true);
+              openConfirmDialog('restore');
             } else setDataError(true);
           })
         }
@@ -70,35 +77,92 @@ const DataSettings: FC = () => {
       <Inputs.Button
         icon={<AutorenewIcon />}
         label='Reset Data'
-        onClick={() => {
-          setConfirmType(1);
-          setConfirmDialog(true);
-        }}
+        onClick={() => openConfirmDialog('reset')}
       />
-      <Dialog onClose={closeConfirmDialog} open={confirmDialog}>
-        <DialogTitle>{`${
-          confirmType ? 'Reset' : 'Restore'
-        } data?`}</DialogTitle>
+      <Dialog onClose={closeConfirmDialog} open={confirmOpen}>
+        <DialogTitle>
+          {confirmType === 'reset'
+            ? 'Reset data to default state?'
+            : 'Restore data from backup file?'}
+        </DialogTitle>
         <DialogContent>
-          <DialogContentText>
-            {confirmType
-              ? "This will reset all of Web Launcher's data to it's default state."
-              : "This will replace all of Web Launcher's data with the selected file's data."}
-          </DialogContentText>
+          <List>
+            {confirmType === 'restore' && (
+              <RadioGroup
+                row
+                sx={{justifyContent: 'center', mb: '8px'}}
+                value={method}
+                onChange={(e) =>
+                  setMethod(e.target.value as 'replace' | 'merge')
+                }
+              >
+                <FormControlLabel
+                  control={<Radio />}
+                  disabled={!widgets}
+                  label='Replace'
+                  value='replace'
+                />
+                <FormControlLabel
+                  control={<Radio />}
+                  disabled={!widgets}
+                  label='Merge'
+                  value='merge'
+                />
+              </RadioGroup>
+            )}
+            <Inputs.Switch
+              label='Widgets'
+              onChange={setWidgets}
+              value={widgets}
+            />
+            <Inputs.Switch
+              label='Settings'
+              onChange={setSettings}
+              value={settings}
+            />
+          </List>
         </DialogContent>
         <DialogActions>
           <MuiButton onClick={closeConfirmDialog}>Cancel</MuiButton>
           <MuiButton
             autoFocus
+            disabled={!widgets && !settings}
             onClick={() => {
-              if (confirmType) {
-                closeConfirmDialog();
+              closeConfirmDialog();
+              if (confirmType === 'reset') {
+                const newData = genDefaultData(widgets);
+                if (!widgets) newData.widgets = data.widgets;
+                if (!settings) newData.settings = data.settings;
                 setSnackbarData(data);
-                setData(genDefaultData());
+                setData(newData);
               } else {
-                closeConfirmDialog();
+                const newData = restoreDataFile!;
+                if (!widgets) {
+                  newData.widgets = data.widgets;
+                } else if (method === 'merge') {
+                  const newWidgets: StorageObject['widgets'] = {
+                    ...data.widgets,
+                  };
+                  for (const [key, value] of Object.entries(newData.widgets)) {
+                    if (Object.prototype.hasOwnProperty.call(newWidgets, key)) {
+                      if (newWidgets[key].c && value.c) {
+                        newWidgets[key] = {...newWidgets[key]};
+                        newWidgets[key].c = [...newWidgets[key].c!];
+                        for (const child of value.c) {
+                          if (!newWidgets[key].c?.includes(child)) {
+                            newWidgets[key].c?.push(child);
+                          }
+                        }
+                      }
+                    } else {
+                      newWidgets[key] = value;
+                    }
+                  }
+                  newData.widgets = newWidgets;
+                }
+                if (!settings) newData.settings = data.settings;
                 setSnackbarData(data);
-                setData(restoreDataFile!);
+                setData(newData);
               }
             }}
           >
@@ -107,8 +171,9 @@ const DataSettings: FC = () => {
         </DialogActions>
       </Dialog>
       <Snackbar
+        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
         autoHideDuration={7000}
-        message={`Data ${confirmType ? 'reset' : 'restored'}`}
+        message={`Data ${confirmType === 'reset' ? 'reset' : 'restored'}`}
         onClose={() => setSnackbarData(undefined)}
         open={Boolean(snackbarData)}
         action={
@@ -122,19 +187,12 @@ const DataSettings: FC = () => {
             undo
           </MuiButton>
         }
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
       />
       <Snackbar
+        anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
         autoHideDuration={7000}
-        onClose={closeDataError}
+        onClose={() => setDataError(false)}
         open={dataError}
-        anchorOrigin={{
-          vertical: 'bottom',
-          horizontal: 'center',
-        }}
       >
         <Alert severity='error' sx={{width: '100%'}} variant='filled'>
           Error - Invalid Backup File

@@ -10,7 +10,7 @@ const dateFormatMap = {
 };
 
 const timeFormatMap = {
-  '12': '%hh:%mm',
+  '12': '%h:%mm',
   '24': '%HH:%mm',
 };
 
@@ -25,7 +25,7 @@ const clock: Widget<{
   defaultData: {time: '12', seconds: true, date: 'short', format: ''},
   exampleData: {time: '12', seconds: true, date: 'short', format: ''},
   defaultGlobalData: {},
-  Widget({data}) {
+  Widget({data, inToolbar}) {
     const date = useDate();
 
     let format = '';
@@ -41,7 +41,11 @@ const clock: Widget<{
     }
 
     return (
-      <Typography fontSize='1.2rem'>
+      <Typography
+        align='center'
+        fontSize={inToolbar ? '1.2rem' : '150%'}
+        fontWeight='bold'
+      >
         {ExpressDate.format(format, date)}
       </Typography>
     );

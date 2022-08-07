@@ -27,7 +27,7 @@ const docsNavGen = (() => {
         <ListItem disablePadding>
           <ListItemButtonLink
             href={`${path}/${v.path}`}
-            sx={{p: '4px 24px', m: '2px 0', borderRadius: 2}}
+            sx={{p: '4px 24px', m: '2px 0', borderRadius: '12px'}}
           >
             <ListItemText
               primary={v.name}

@@ -1,6 +1,6 @@
 # Clock Widget
 
-The Clock widget shows the time in the specified format.
+The Clock widget displays the time and date in the specified format.
 
 ## Settings
 

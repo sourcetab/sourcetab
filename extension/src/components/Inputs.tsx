@@ -287,48 +287,42 @@ const FileInput: FC<{
         textFieldRef.current?.select();
       }}
     >
-      <>
-        <IconButton
-          sx={{mr: '8px'}}
-          onClick={async () =>
-            uploadFile('raw', accept).then((file) => {
-              setData(deleteOldFile);
-              setData((data) => {
-                let fileName = file.name;
-                const filesKeys = Object.keys(data.files);
-                if (filesKeys.includes(fileName)) {
-                  for (
-                    let index = 1;
-                    filesKeys.includes(fileName);
-                    index += 1
-                  ) {
-                    const fileNameSplit = file.name.split('.');
-                    fileNameSplit[fileNameSplit.length - 2] += `(${index})`;
-                    fileName = fileNameSplit.join('.');
-                  }
+      <IconButton
+        sx={{mr: '8px'}}
+        onClick={async () =>
+          uploadFile('raw', accept).then((file) => {
+            setData(deleteOldFile);
+            setData((data) => {
+              let fileName = file.name;
+              const filesKeys = Object.keys(data.files);
+              if (filesKeys.includes(fileName)) {
+                for (let index = 1; filesKeys.includes(fileName); index += 1) {
+                  const fileNameSplit = file.name.split('.');
+                  fileNameSplit[fileNameSplit.length - 2] += `(${index})`;
+                  fileName = fileNameSplit.join('.');
                 }
-                data.files[fileName] = file.data;
-                onChange(fileName);
-              });
-            })
+              }
+              data.files[fileName] = file.data;
+              onChange(fileName);
+            });
+          })
+        }
+      >
+        <FileUploadIcon />
+      </IconButton>
+      <OutlinedInput
+        inputProps={{ref: textFieldRef}}
+        onChange={(e) => setText(e.target.value)}
+        size='small'
+        sx={{mr: '-8px', width: '187px'}}
+        value={text}
+        onBlur={(e) => {
+          if (e.target.value !== value) {
+            setData(deleteOldFile);
+            onChange(e.target.value);
           }
-        >
-          <FileUploadIcon />
-        </IconButton>
-        <OutlinedInput
-          inputProps={{ref: textFieldRef}}
-          onChange={(e) => setText(e.target.value)}
-          size='small'
-          sx={{mr: '-8px', width: '187px'}}
-          value={text}
-          onBlur={(e) => {
-            if (e.target.value !== value) {
-              setData(deleteOldFile);
-              onChange(e.target.value);
-            }
-          }}
-        />
-      </>
+        }}
+      />
     </BaseInput>
   );
 };

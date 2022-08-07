@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import {
   Box,
   Card,
@@ -7,7 +5,6 @@ import {
   CardContent,
   Dialog,
   DialogContent,
-  Stack,
   Typography,
 } from '@mui/material';
 
@@ -63,7 +60,13 @@ const WidgetsDialog: FC<{
                   <Typography gutterBottom component='div' variant='h6'>
                     {widget.name}
                   </Typography>
-                  <Box sx={{width: '118px', height: '118px'}}>
+                  <Box
+                    sx={{
+                      width: '118px',
+                      height: '118px',
+                      borderRadius: `${data.settings.dashboard.radius}px`,
+                    }}
+                  >
                     {/* @ts-expect-error */}
                     <widget.Widget
                       disable

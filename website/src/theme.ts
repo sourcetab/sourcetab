@@ -7,6 +7,9 @@ const theme = createTheme({
       main: '#2196f3',
     },
   },
+  shape: {
+    borderRadius: 8,
+  },
 });
 
 export default theme;

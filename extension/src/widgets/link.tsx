@@ -13,6 +13,7 @@ const link: Widget<
     scale: number;
   },
   {
+    openInNewTab: boolean;
     autocomplete: {
       label: boolean;
       bg: boolean;
@@ -39,17 +40,27 @@ const link: Widget<
     scale: 100,
   },
   defaultGlobalData: {
+    openInNewTab: false,
     autocomplete: {
       label: false,
       bg: true,
       fg: true,
     },
   },
-  Widget({data, disable, inToolbar}) {
+  Widget({data, globalData, disable, inToolbar}) {
     let visual: React.ReactNode;
     switch (data.fgType) {
       case 'img':
-        visual = (
+        visual = inToolbar ? (
+          <SvgIcon
+            sx={{
+              fill: `#${data.fgColor}`,
+              transform: `scale(${data.scale * 0.0167})`,
+            }}
+          >
+            <image height='24' href={data.fgData} width='24' />
+          </SvgIcon>
+        ) : (
           <Box
             component='img'
             src={data.fgData}
@@ -63,67 +74,65 @@ const link: Widget<
         );
         break;
       case 'ico':
-        visual = inToolbar ? (
+        visual = (
           <SvgIcon
             sx={{
               fill: `#${data.fgColor}`,
-              transform: `scale(${data.scale * 0.01})`,
+              transform: `scale(${data.scale * (inToolbar ? 0.01 : 0.0065)})`,
+              ...(inToolbar ? {} : {width: '100%', height: '100%'}),
             }}
           >
             <SimpleIcons icon={data.fgData} />
           </SvgIcon>
-        ) : (
-          <svg
-            fill={`#${data.fgColor}`}
-            transform={`scale(${data.scale * 0.0065})`}
-            viewBox='0 0 24 24'
-          >
-            <SimpleIcons icon={data.fgData} />
-          </svg>
         );
         break;
       case 'let':
         visual = (
-          <Box
+          <SvgIcon
             sx={{
-              width: '100%',
-              height: '100%',
-              lineHeight: '125px',
-              textAlign: 'center',
+              fill: `#${data.fgColor}`,
+              ...(inToolbar
+                ? {transform: `scale(1.67)`}
+                : {
+                    width: '100%',
+                    height: '100%',
+                  }),
             }}
           >
-            <Box
-              sx={{
-                color: `#${data.fgColor}`,
-                verticalAlign: 'middle',
-                display: 'inline-block',
-                wordWrap: 'break-word',
-                lineHeight: 1,
-                width: '100%',
-                fontSize: data.scale * 0.45,
-                fontWeight: 'bold',
-              }}
+            <text
+              dominantBaseline='middle'
+              fontSize={data.scale * 0.14}
+              fontWeight='bold'
+              textAnchor='middle'
+              x='12'
+              y='12'
             >
               {data.fgData}
-            </Box>
-          </Box>
+            </text>
+          </SvgIcon>
         );
         break;
       default:
         break;
     }
 
+    const anchorProps = disable
+      ? {}
+      : {
+          component: 'a',
+          href: data.url,
+          target: globalData.openInNewTab ? '_blank' : undefined,
+        };
+
     return inToolbar ? (
       <Box sx={{backgroundColor: `#${data.bgColor}`, borderRadius: '50%'}}>
-        <IconButton
-          {...(disable ? {disabled: true} : {component: 'a', href: data.url})}
-        >
+        <IconButton sx={{overflow: 'hidden'}} {...anchorProps}>
           {visual}
         </IconButton>
       </Box>
     ) : (
       <Box
-        {...(disable ? {} : {component: 'a', href: data.url})}
+        {...anchorProps}
         sx={{
           width: '100%',
           height: '100%',
@@ -237,6 +246,16 @@ const link: Widget<
   GlobalSettings({data, setData}) {
     return (
       <>
+        <Inputs.Switch
+          label='Open in New Tab'
+          value={data.openInNewTab}
+          onChange={(newValue) =>
+            setData({
+              ...data,
+              openInNewTab: newValue,
+            })
+          }
+        />
         <Inputs.Switch
           label='Autocomplete Label'
           value={data.autocomplete.label}

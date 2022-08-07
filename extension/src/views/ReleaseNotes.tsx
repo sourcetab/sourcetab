@@ -1,36 +1,42 @@
-import {Dialog, DialogContent} from '@mui/material';
-import ReactMarkdown from 'react-markdown';
+import {Alert, Button, Snackbar} from '@mui/material';
 import {useEffect, useState} from 'react';
-import DialogTitleActions from '@/components/DialogTitleActions';
 import {weblauncherVersion} from '@/globals';
 import useStorage from '@/hooks/useStorage';
 
 const ReleaseNotes: FC = () => {
   const [data, setData] = useStorage();
-  const [body, setBody] = useState('');
+  const [open, setOpen] = useState(false);
 
   useEffect(() => {
-    fetch(
-      `https://api.github.com/repos/web-launcher/web-launcher/releases/tags/v${weblauncherVersion}`,
-    )
-      .then(async (v) => v.json())
-      .then((v) => setBody(v.body));
+    if (data.releaseNotes) {
+      setOpen(true);
+      setData((data) => {
+        data.releaseNotes = false;
+      });
+    }
   }, []);
 
-  const handleClose = () =>
-    setData((data) => {
-      data.releaseNotes = false;
-    });
-
   return (
-    <Dialog onClose={handleClose} open={Boolean(body)}>
-      <DialogTitleActions onClose={handleClose}>
-        Web Launcher {weblauncherVersion} released
-      </DialogTitleActions>
-      <DialogContent>
-        <ReactMarkdown>{body}</ReactMarkdown>
-      </DialogContent>
-    </Dialog>
+    <Snackbar
+      anchorOrigin={{vertical: 'bottom', horizontal: 'center'}}
+      onClose={() => setOpen(false)}
+      open={open}
+    >
+      <Alert
+        severity='info'
+        action={
+          <Button
+            color='inherit'
+            href={`https://github.com/web-launcher/web-launcher/releases/tag/v${weblauncherVersion}`}
+            size='small'
+          >
+            See Release
+          </Button>
+        }
+      >
+        Web Launcher updated to v{weblauncherVersion}
+      </Alert>
+    </Snackbar>
   );
 };
 

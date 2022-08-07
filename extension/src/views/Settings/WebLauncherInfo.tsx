@@ -10,8 +10,6 @@ import {weblauncherVersion} from '@/globals';
 import useStorage from '@/hooks/useStorage';
 
 const WebLauncherInfo: FC = () => {
-  const [data, setData] = useStorage();
-
   return (
     <List>
       <Inputs.Button
@@ -29,13 +27,9 @@ const WebLauncherInfo: FC = () => {
         }
       />
       <Inputs.Button
+        href={`https://github.com/web-launcher/web-launcher/releases/tag/v${weblauncherVersion}`}
         icon={<UpdateIcon />}
         label={`View v${weblauncherVersion} Release Notes`}
-        onClick={() =>
-          setData((data) => {
-            data.releaseNotes = true;
-          })
-        }
       />
     </List>
   );

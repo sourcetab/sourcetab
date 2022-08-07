@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment */
-
 import {Box, BoxProps, Typography} from '@mui/material';
 import {forwardRef, useRef} from 'react';
 
@@ -161,7 +159,11 @@ const WidgetItemToolbar = forwardRef<HTMLElement, WidgetItemPropsInner>(
             : WidgetEditMenuSmall;
 
         return (
-          <Box {...rootProps} ref={ref} sx={{position: 'relative'}}>
+          <Box
+            {...rootProps}
+            ref={ref}
+            sx={{position: 'relative', margin: '0 4px'}}
+          >
             <Box {...innerProps} ref={widgetRef}>
               {/* @ts-expect-error */}
               <Widget

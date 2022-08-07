@@ -2,7 +2,7 @@ import {Box, Grid, Paper} from '@mui/material';
 
 import theme from '@/theme';
 
-const downloadMap: Record<string, string> = {
+export const downloadMap: Record<string, string> = {
   Demo: 'https://demo.weblauncher.app',
   Chrome:
     'https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo',
@@ -20,6 +20,7 @@ const downloadJsx = Object.keys(downloadMap).map((download) => (
       component='a'
       elevation={2}
       href={downloadMap[download]}
+      target='_blank'
       sx={{
         width: '100%',
         padding: '16px',
@@ -47,7 +48,7 @@ const downloadJsx = Object.keys(downloadMap).map((download) => (
 ));
 
 const Downloads: FC = () => (
-  <Box id='downloads' sx={{m: '6vh 16px 12vh'}}>
+  <Box id='downloads' sx={{m: '32px 16px 12vh'}}>
     <Box component='h2' sx={{textAlign: 'center'}}>
       Download Now
     </Box>

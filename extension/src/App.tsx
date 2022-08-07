@@ -16,7 +16,7 @@ const App: FC = () => {
     <>
       <Background />
       <WidgetRenderer />
-      {data.releaseNotes ? <ReleaseNotes /> : null}
+      <ReleaseNotes />
     </>
   );
 };

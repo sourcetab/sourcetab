@@ -146,6 +146,9 @@ const config = async (
               version: pkg.version,
               manifest_version: platform === 'firefox' ? 2 : 3,
             },
+            platform === 'firefox'
+              ? {chrome_settings_overrides: {homepage: 'index.html'}}
+              : {},
           ],
         }),
         ...isProd([

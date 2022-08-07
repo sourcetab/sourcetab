@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unsafe-assignment,@typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
 
 import {weblauncherVersion} from '@/globals';
 import {genId, versionLessThan, nonPatchVersionLessThan} from '@/utils';

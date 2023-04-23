@@ -4,7 +4,7 @@ import process from 'node:process';
 
 import react from '@vitejs/plugin-react-swc';
 import {visualizer} from 'rollup-plugin-visualizer';
-import Compression from 'unplugin-compression/vite';
+import zipPack from 'vite-plugin-zip-pack';
 import {WebExtPlugin} from 'unplugin-web-ext/vite';
 import {defineConfig, type PluginOption} from 'vite';
 
@@ -40,13 +40,14 @@ export default defineConfig({
               },
               platform === 'firefox' ? './assets/manifest-firefox.json' : {},
             ],
-          }),
-          Compression({
-            adapter: 'zip',
-            source: `dist/${platform}`,
+          }) as unknown as PluginOption,
+          zipPack({
+            inDir: `dist/${platform}`,
             outDir: 'dist',
-            formatter: `${platform}.${platform === 'firefox' ? 'xpi' : 'zip'}`,
-          }),
+            outFileName: `${platform}.${
+              platform === 'firefox' ? 'xpi' : 'zip'
+            }`,
+          }) as unknown as PluginOption,
         ]),
     visualizer({
       filename: 'dist/stats.html',

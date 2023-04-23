@@ -15,7 +15,7 @@ interface HomeProps {
 }
 
 const Home: NextPage<HomeProps> = ({extensionStatsData}) => {
-  const title = 'Web Launcher: New Tab Dashboard';
+  const title = 'Sourcetab: New Tab Dashboard';
 
   return (
     <>

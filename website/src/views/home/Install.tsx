@@ -28,7 +28,7 @@ const Install: FC = () => {
         Install {browser === 'other' ? 'Now' : `on ${browser}`}
       </Button>
       <Button
-        href='https://demo.weblauncher.app'
+        href='https://web.sourcetab.org'
         size='large'
         target='_blank'
         variant='outlined'

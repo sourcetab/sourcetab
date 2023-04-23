@@ -4,7 +4,7 @@
     "gen-imgs": "node ./scripts/genImgs.js"
   },
   "dependencies": {
-    "@xmldom/xmldom": "^0.7.5",
-    "sharp": "^0.29.3"
+    "@xmldom/xmldom": "^0.7.10",
+    "sharp": "^0.32.0"
   }
 }

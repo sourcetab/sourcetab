@@ -10,7 +10,7 @@ import theme from '@/theme';
 
 const linkMap = {
   '/#downloads': {text: 'Downloads', icon: DownloadIcon},
-  'https://github.com/web-launcher/web-launcher': {
+  'https://github.com/sourcetab/sourcetab': {
     text: 'GitHub',
     icon: GitHubIcon,
   },
@@ -67,7 +67,7 @@ const Header: FC = () => (
           padding: '4px',
         }}
       >
-        Web Launcher
+        Sourcetab
       </Link>
       <Box sx={{flexGrow: '1'}} />
       <Box

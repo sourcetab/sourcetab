@@ -1,6 +1,6 @@
 # Appearance Settings
 
-The appearance settings let you customize the way Web Launcher looks. To get here, in the settings, click on the "Appearance" button in the navigation.
+The appearance settings let you customize the way Sourcetab looks. To get here, in the settings, click on the "Appearance" button in the navigation.
 
 ## Theme Color
 
@@ -12,7 +12,7 @@ This lets you change from the lighter colored UI into a more darkened version. W
 
 ## Page Title
 
-This lets you set the text that shows up as the label for Web Launcher in your list of tabs.
+This lets you set the text that shows up as the label for Sourcetab in your list of tabs.
 
 ## Border Radius
 

@@ -1,28 +1,21 @@
 {
-  "name": "web-launcher",
-  "version": "3.2.0",
+  "name": "sourcetab",
+  "version": "3.3.0",
   "description": "A material design dashboard for your new tab page.",
   "scripts": {
     "test": "xo",
-    "prepare": "husky install",
-    "build": "npm run build:web -w extension && npm run build -w website"
+    "build": "npm run build:web -w client && npm run build -w website"
   },
   "workspaces": [
     "brand",
-    "extension",
+    "client",
     "website"
   ],
   "dependencies": {
     "eslint-config-xo-react": "^0.27.0",
-    "eslint-plugin-react": "^7.30.0",
+    "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "husky": "^8.0.1",
-    "lint-staged": "^13.0.2",
-    "xo": "^0.50.0"
-  },
-  "lint-staged": {
-    "*.{js,ts,tsx}": "xo --fix",
-    "*": "prettier --ignore-unknown --write"
+    "xo": "^0.54.1"
   },
   "prettier": {
     "bracketSpacing": false,
@@ -40,6 +33,8 @@
     ],
     "rules": {
       "@typescript-eslint/ban-ts-comment": "off",
+      "@typescript-eslint/consistent-type-definitions": "off",
+      "@typescript-eslint/consistent-type-imports": "off",
       "@typescript-eslint/naming-convention": "off",
       "@typescript-eslint/no-confusing-void-expression": "off",
       "@typescript-eslint/no-dynamic-delete": "off",
@@ -70,6 +65,7 @@
       ],
       "max-depth": "off",
       "n/file-extension-in-import": "off",
+      "new-cap": "off",
       "react/function-component-definition": [
         "error",
         {
@@ -98,6 +94,7 @@
           }
         }
       ],
+      "unicorn/no-array-reduce": "off",
       "unicorn/prefer-node-protocol": "off",
       "unicorn/prevent-abbreviations": "off"
     }

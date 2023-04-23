@@ -55,7 +55,7 @@ const docsNavGen = (() => {
 const titleGen = (
   paths: string[],
   config = docsConfig,
-  current = 'Web Launcher | Docs',
+  current = 'Sourcetab | Docs',
 ): string => {
   if (paths.length > 0) {
     const path = paths.shift();

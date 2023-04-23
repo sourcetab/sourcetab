@@ -12,7 +12,7 @@
   <circle id="icon" cx="460" cy="227" r="127" />
   <!-- dy is 1/4 of font-size -->
   <text x="460" y="440" dy="28" font-size="112" style="font-weight: bold">
-    Web Launcher
+    Sourcetab
   </text>
   <!-- dy is 1/4 of font-size -->
   <text x="460" y="548" dy="16" font-size="64">

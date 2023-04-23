@@ -12,7 +12,7 @@ This is the location the widget redirects to when clicked.
 
 #### Icon
 
-The icon type lets you set the foreground to common brand icons, available from [Simple Icons](https://simpleicons.org). Once this type is selected, click the Foreground Icon button to show the list of icons to choose from.
+The icon type lets you set the foreground to common brand icons, available from [Iconify](https://icon-sets.iconify.design). Once this type is selected, click the Foreground Icon button to show the list of icons to choose from.
 
 #### Image
 
@@ -30,20 +30,12 @@ This is the color of the background that shows up behind all of the foreground t
 
 This is the color of the foreground for either the icon or letter; it does not affect the image type.
 
+### Container (Firefox only)
+
+This is the container (or none) that the url will be opened in. See more info on Firefox Multi-Account Containers [here](https://support.mozilla.org/en-US/kb/containers).
+
 ## Global Settings
 
 ### Open in New Tab
 
 If checked, clicking on the widget will open up in a new tab instead of replacing the current tab.
-
-### Autocomplete Label
-
-If checked, this automatically fills in the Label field when selected a Foreground Icon.
-
-### Autocomplete Background
-
-If checked, this automatically fills in the Background Color field when selected a Foreground Icon.
-
-### Autocomplete Foreground
-
-If checked, this automatically fills in the Foreground Color field when selected a Foreground Icon.

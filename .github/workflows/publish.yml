@@ -3,58 +3,60 @@ on:
   release:
     types: [published]
 jobs:
-  test:
+  publish-website:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - run: npm ci && npm run build && npm test
-  publish-website-and-demo:
-    needs: [test]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v2
-      - uses: actions/setup-node@v3
+          node-version: 18
+      - run: npm ci && npm run build -w website
+      - uses: peaceiris/actions-gh-pages@v3
         with:
-          node-version: 16
-      - run: npm ci && npm run build
-      - uses: FirebaseExtended/action-hosting-deploy@v0
-        with:
-          repoToken: '${{ secrets.GITHUB_TOKEN }}'
-          firebaseServiceAccount: '${{ secrets.FIREBASE_SERVICE_ACCOUNT_WEB_LAUNCHER_DB }}'
-          channelId: live
-          projectId: web-launcher-db
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: website/out
+          cname: sourcetab.org
   publish-chrome:
-    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - run: npm ci && npm run build:chrome -w extension
+          node-version: 18
+      - run: npm ci && npm run build:chrome -w client
       - uses: trmcnvn/chrome-addon@v2
         with:
           extension: akomlegpokabommpdjfmhnbdcnaefmdo
-          zip: extension/dist/chrome.zip
+          zip: client/dist/chrome.zip
           client-id: ${{ secrets.CHROME_CLIENT_ID }}
           client-secret: ${{ secrets.CHROME_CLIENT_SECRET }}
           refresh-token: ${{ secrets.CHROME_REFRESH_TOKEN }}
   publish-firefox:
-    needs: [test]
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
       - uses: actions/setup-node@v3
         with:
-          node-version: 16
-      - run: npm ci && npm run build:firefox -w extension
+          node-version: 18
+      - run: npm ci && npm run build:firefox -w client
       - uses: trmcnvn/firefox-addon@v1
         with:
           uuid: '{16acb437-3c59-4caf-a4b2-d79839cbf588}'
-          xpi: extension/dist/firefox.xpi
-          manifest: extension/dist/firefox/manifest.json
+          xpi: client/dist/firefox.xpi
+          manifest: client/dist/firefox/manifest.json
           api-key: ${{ secrets.FIREFOX_JWT_ISSUER }}
           api-secret: ${{ secrets.FIREFOX_JWT_SECRET }}
+  publish-web:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - run: npm ci && npm run build:web -w client
+      - uses: peaceiris/actions-gh-pages@v3
+        with:
+          personal_token: ${{ secrets.PERSONAL_TOKEN }}
+          publish_dir: client/dist/web
+          cname: web.sourcetab.org
+          external_repository: sourcetab/sourcetab-client-dist

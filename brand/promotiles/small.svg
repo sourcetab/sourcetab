@@ -11,5 +11,5 @@
   <rect x="0" y="0" width="440" height="280" fill="#37474f" />
   <circle id="icon" cx="220" cy="103" r="76" />
   <!-- dy is 1/4 of font-size -->
-  <text x="220" y="225" dy="14" font-size="56" style="font-weight: bold">Web Launcher</text>
+  <text x="220" y="225" dy="14" font-size="56" style="font-weight: bold">Sourcetab</text>
 </svg>

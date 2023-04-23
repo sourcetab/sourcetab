@@ -7,9 +7,8 @@ import {useEffect, useState} from 'react';
 import screenshot1 from '../../../../brand/screenshots/small/screenshot1.webp';
 import screenshot2 from '../../../../brand/screenshots/small/screenshot2.webp';
 import screenshot3 from '../../../../brand/screenshots/small/screenshot3.webp';
-import screenshot4 from '../../../../brand/screenshots/small/screenshot4.webp';
 
-const images = [screenshot1, screenshot2, screenshot3, screenshot4];
+const images = [screenshot1, screenshot2, screenshot3];
 
 const maxSteps = images.length;
 

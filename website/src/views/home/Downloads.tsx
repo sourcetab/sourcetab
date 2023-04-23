@@ -3,15 +3,15 @@ import {Box, Grid, Paper} from '@mui/material';
 import theme from '@/theme';
 
 export const downloadMap: Record<string, string> = {
-  Demo: 'https://demo.weblauncher.app',
+  Web: 'https://web.sourcetab.org',
   Chrome:
-    'https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo',
-  Edge: 'https://microsoftedge.microsoft.com/addons/detail/web-launcher/fpknfiaimmgbbpplehjclidiphmhljeh',
-  Firefox: 'https://addons.mozilla.org/en-US/firefox/addon/web-launcher/',
+    'https://chrome.google.com/webstore/detail/sourcetab/akomlegpokabommpdjfmhnbdcnaefmdo',
+  Edge: 'https://microsoftedge.microsoft.com/addons/detail/sourcetab/fpknfiaimmgbbpplehjclidiphmhljeh',
+  Firefox: 'https://addons.mozilla.org/en-US/firefox/addon/sourcetab/',
   Brave:
-    'https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo',
+    'https://chrome.google.com/webstore/detail/sourcetab/akomlegpokabommpdjfmhnbdcnaefmdo',
   Vivaldi:
-    'https://chrome.google.com/webstore/detail/web-launcher/akomlegpokabommpdjfmhnbdcnaefmdo',
+    'https://chrome.google.com/webstore/detail/sourcetab/akomlegpokabommpdjfmhnbdcnaefmdo',
 };
 
 const downloadJsx = Object.keys(downloadMap).map((download) => (

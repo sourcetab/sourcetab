@@ -13,7 +13,6 @@ import '@fontsource/nunito/latin-800.css';
 import theme from '@/theme';
 import DocsLayout from '@/views/DocsLayout';
 import createEmotionCache from '../createEmotionCache';
-import '@/firebase';
 
 const clientSideEmotionCache = createEmotionCache();
 

@@ -2,7 +2,7 @@
 
 /** @type {import('next-sitemap').IConfig} */
 const config = {
-  siteUrl: 'https://weblauncher.app',
+  siteUrl: 'https://sourcetab.org',
   generateRobotsTxt: true,
   generateIndexSitemap: false,
   outDir: 'out',

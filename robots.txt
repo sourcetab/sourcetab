@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://sourcetab.org
+
+# Sitemaps
+Sitemap: https://sourcetab.org/sitemap.xml

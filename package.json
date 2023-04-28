@@ -1,7 +1,7 @@
 {
   "name": "sourcetab",
+  "private": true,
   "version": "3.3.0",
-  "description": "A material design dashboard for your new tab page.",
   "scripts": {
     "test": "xo",
     "build": "npm run build:web -w client && npm run build -w website"

@@ -1,7 +1,7 @@
 {
   "name": "Sourcetab: New Tab Dashboard",
   "short_name": "Sourcetab",
-  "description": "A material design dashboard for your browser's new tab page with widgets and settings.",
+  "description": "An open-source dashboard for your browser's new tab page, customizable with a variety of widgets and settings.",
   "chrome_url_overrides": {
     "newtab": "index.html"
   },

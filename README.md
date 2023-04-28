@@ -1,6 +1,6 @@
 # Sourcetab
 
-A material design dashboard for your browser's new tab page customizable with a variety of widgets and settings.
+An open-source dashboard for your browser's new tab page, customizable with a variety of widgets and settings.
 
 ## Getting Started
 
@@ -13,7 +13,6 @@ Please visit [sourcetab.org/docs](https://sourcetab.org/docs) for installation i
 ### Features
 
 - Multiple types of widgets to add to the dashboard and toolbar.
-- Different alignments for widgets in the toolbar.
 - Easily rearrange widgets through drag and drop while in edit mode.
 - Many customizable options in the settings.
 - Easy data management for backup and restoration later on.
@@ -21,7 +20,7 @@ Please visit [sourcetab.org/docs](https://sourcetab.org/docs) for installation i
 ### Backgrounds
 
 - Solid color
-- Lineage gradient
+- Linear gradient
 - Uploaded or URL-specified image/video
 - Embedded website
 - Embedded YouTube video
@@ -43,4 +42,4 @@ To build the Firefox extension run `npm run build:firefox -w client`. The build 
 
 ## License
 
-This project is licensed under the GPL-3.0 License. See the [LICENSE](LICENSE) file for details.
+This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.

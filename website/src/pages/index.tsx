@@ -22,7 +22,7 @@ const Home: NextPage<HomeProps> = ({extensionStatsData}) => {
       <Head>
         <title>{title}</title>
         <meta
-          content="A material design dashboard for your browser's new tab page."
+          content="An open-source dashboard for your browser's new tab page, customizable with a variety of widgets and settings."
           name='description'
         />
       </Head>
@@ -34,7 +34,7 @@ const Home: NextPage<HomeProps> = ({extensionStatsData}) => {
           {title}
         </Box>
         <Typography fontSize='1.125rem'>
-          A material design dashboard for your browser&apos;s new tab page
+          An open-source dashboard for your browser&apos;s new tab page,
           <br />
           customizable with a variety of widgets and settings.
         </Typography>

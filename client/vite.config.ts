@@ -33,12 +33,12 @@ export default defineConfig({
       : [
           WebExtPlugin({
             manifest: [
-              './assets/manifest.json',
+              './src/manifest.json',
               {
                 version: pkg.version,
                 manifest_version: platform === 'firefox' ? 2 : 3,
               },
-              platform === 'firefox' ? './assets/manifest-firefox.json' : {},
+              platform === 'firefox' ? './src/manifest-firefox.json' : {},
             ],
           }) as unknown as PluginOption,
           zipPack({

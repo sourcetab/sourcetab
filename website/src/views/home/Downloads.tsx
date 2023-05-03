@@ -4,14 +4,11 @@ import theme from '@/theme';
 
 export const downloadMap: Record<string, string> = {
   Web: 'https://web.sourcetab.org',
-  Chrome:
-    'https://chrome.google.com/webstore/detail/sourcetab/akomlegpokabommpdjfmhnbdcnaefmdo',
-  Edge: 'https://microsoftedge.microsoft.com/addons/detail/sourcetab/fpknfiaimmgbbpplehjclidiphmhljeh',
-  Firefox: 'https://addons.mozilla.org/en-US/firefox/addon/sourcetab/',
-  Brave:
-    'https://chrome.google.com/webstore/detail/sourcetab/akomlegpokabommpdjfmhnbdcnaefmdo',
-  Vivaldi:
-    'https://chrome.google.com/webstore/detail/sourcetab/akomlegpokabommpdjfmhnbdcnaefmdo',
+  Chrome: 'https://chrome.sourcetab.org',
+  Edge: 'https://edge.sourcetab.org',
+  Firefox: 'https://firefox.sourcetab.org',
+  Brave: 'https://chrome.sourcetab.org',
+  Vivaldi: 'https://chrome.sourcetab.org',
 };
 
 const downloadJsx = Object.keys(downloadMap).map((download) => (

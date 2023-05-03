@@ -6,9 +6,9 @@ An open-source dashboard for your browser's new tab page, customizable with a va
 
 Please visit [sourcetab.org/docs](https://sourcetab.org/docs) for installation instructions.
 
-| [Web](https://web.sourcetab.org/)                                         | [Chrome](https://chrome.google.com/webstore/detail/sourcetab/akomlegpokabommpdjfmhnbdcnaefmdo)                                         | [Edge](https://microsoftedge.microsoft.com/addons/detail/sourcetab/fpknfiaimmgbbpplehjclidiphmhljeh)                                         | [Firefox](https://addons.mozilla.org/en-US/firefox/addon/sourcetab/)                                         |
-| ------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------ |
-| [![](website/public/assets/download/web.svg)](https://web.sourcetab.org/) | [![](website/public/assets/download/chrome.svg)](https://chrome.google.com/webstore/detail/sourcetab/akomlegpokabommpdjfmhnbdcnaefmdo) | [![](website/public/assets/download/edge.svg)](https://microsoftedge.microsoft.com/addons/detail/sourcetab/fpknfiaimmgbbpplehjclidiphmhljeh) | [![](website/public/assets/download/firefox.svg)](https://addons.mozilla.org/en-US/firefox/addon/sourcetab/) |
+| [Web](https://web.sourcetab.org/)                                         | [Chrome](https://chrome.sourcetab.org)                                         | [Edge](https://edge.sourcetab.org)                                         | [Firefox](https://firefox.sourcetab.org)                                         |
+| ------------------------------------------------------------------------- | ------------------------------------------------------------------------------ | -------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| [![](website/public/assets/download/web.svg)](https://web.sourcetab.org/) | [![](website/public/assets/download/chrome.svg)](https://chrome.sourcetab.org) | [![](website/public/assets/download/edge.svg)](https://edge.sourcetab.org) | [![](website/public/assets/download/firefox.svg)](https://firefox.sourcetab.org) |
 
 ### Features
 

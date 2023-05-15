@@ -10,7 +10,8 @@ export default class MyDocument extends Document {
         <Head>
           {/* PWA primary color */}
           <meta content={theme.palette.primary.main} name='theme-color' />
-          <link href='/static/favicon.ico' rel='shortcut icon' />
+          <meta content='initial-scale=1, width=device-width' name='viewport' />
+          <link href='/favicon.png' rel='icon' type='image/png' />
           <style>{'html{scroll-behavior:smooth}'}</style>
           {/* Inject MUI styles first to match with the prepend: true configuration. */}
           {(this.props as any).emotionStyleTags}

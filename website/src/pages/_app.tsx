@@ -27,10 +27,6 @@ const App: FC<CustomAppProps> = ({
   router,
 }) => (
   <CacheProvider value={emotionCache}>
-    <Head>
-      <meta content='initial-scale=1, width=device-width' name='viewport' />
-      <link href='/favicon.png' rel='shortcut icon' type='image/png' />
-    </Head>
     {router.pathname === '/_error' ? (
       <Component {...pageProps} />
     ) : (

@@ -26,23 +26,29 @@ const App: FC<CustomAppProps> = ({
   pageProps,
   router,
 }) => (
-  <CacheProvider value={emotionCache}>
-    {router.pathname === '/_error' ? (
-      <Component {...pageProps} />
-    ) : (
-      <ThemeProvider theme={theme}>
-        <CssBaseline />
-        <Header />
-        {router.pathname.startsWith('/docs') ? (
-          <DocsLayout>
+  <>
+    <Head>
+      <meta content='initial-scale=1, width=device-width' name='viewport' />
+      <link href='/favicon.png' rel='icon' type='image/png' />
+    </Head>
+    <CacheProvider value={emotionCache}>
+      {router.pathname === '/_error' ? (
+        <Component {...pageProps} />
+      ) : (
+        <ThemeProvider theme={theme}>
+          <CssBaseline />
+          <Header />
+          {router.pathname.startsWith('/docs') ? (
+            <DocsLayout>
+              <Component {...pageProps} />
+            </DocsLayout>
+          ) : (
             <Component {...pageProps} />
-          </DocsLayout>
-        ) : (
-          <Component {...pageProps} />
-        )}
-      </ThemeProvider>
-    )}
-  </CacheProvider>
+          )}
+        </ThemeProvider>
+      )}
+    </CacheProvider>
+  </>
 );
 
 export default App;

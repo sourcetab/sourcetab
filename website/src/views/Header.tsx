@@ -3,9 +3,8 @@ import {
   Download as DownloadIcon,
   GitHub as GitHubIcon,
 } from '@mui/icons-material';
-import {AppBar, Box, Toolbar} from '@mui/material';
-import IconButtonLink from '@/components/IconButtonLink';
-import Link from '@/components/Link';
+import {AppBar, Box, Toolbar, Link, IconButton} from '@mui/material';
+import NextLink from 'next/link';
 import theme from '@/theme';
 
 const linkMap = {
@@ -21,6 +20,7 @@ const textJsx = (Object.keys(linkMap) as Array<keyof typeof linkMap>).map(
   (link) => (
     <Link
       color='inherit'
+      component={NextLink}
       fontSize='18px'
       href={link}
       key={link}
@@ -36,14 +36,15 @@ const iconJsx = (Object.keys(linkMap) as Array<keyof typeof linkMap>).map(
     const Icon = linkMap[link].icon;
 
     return (
-      <IconButtonLink
+      <IconButton
         color='inherit'
+        component={NextLink}
         href={link}
         key={link}
         title={linkMap[link].text}
       >
         <Icon />
-      </IconButtonLink>
+      </IconButton>
     );
   },
 );
@@ -56,6 +57,7 @@ const Header: FC = () => (
     <Toolbar sx={{width: '100%', maxWidth: '1000px'}}>
       <Link
         color='inherit'
+        component={NextLink}
         fontSize='26px'
         href='/'
         letterSpacing='-1px'

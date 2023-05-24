@@ -3,13 +3,14 @@ import {
   Drawer,
   List,
   ListItem,
+  ListItemButton,
   ListItemText,
   Toolbar,
 } from '@mui/material';
 import {Fragment} from 'react';
 import Head from 'next/head';
 import {useRouter} from 'next/router';
-import ListItemButtonLink from '@/components/ListItemButtonLink';
+import NextLink from 'next/link';
 import docsConfig from '@/docsConfig';
 
 export type DocsConfig = Array<{
@@ -25,7 +26,8 @@ const docsNavGen = (() => {
     config.map((v) => (
       <Fragment key={v.name}>
         <ListItem disablePadding>
-          <ListItemButtonLink
+          <ListItemButton
+            component={NextLink}
             href={`${path}/${v.path}`}
             sx={{p: '4px 24px', m: '2px 0', borderRadius: '12px'}}
           >
@@ -33,7 +35,7 @@ const docsNavGen = (() => {
               primary={v.name}
               sx={{color: 'black', pl: `${indent * 16}px`}}
             />
-          </ListItemButtonLink>
+          </ListItemButton>
         </ListItem>
         {v.children && (
           <List disablePadding component='div'>

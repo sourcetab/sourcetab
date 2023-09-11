@@ -1,88 +1,227 @@
 declare const PLATFORM: 'WEB' | 'CHROME' | 'FIREFOX';
 declare const VERSION: string;
 
-type FC<P = Record<string, unknown>> = import('react').FunctionComponent<
-  P & {children?: React.ReactNode}
->;
+type DeepRequired<T> = Required<{
+  [K in keyof T]: DeepRequired<T[K]>;
+}>;
+
+type Inter<T> = [DeepRequired<T>, (fn: (state: T) => void) => void, T];
+
+interface WidgetData {
+  type: string;
+  name: string;
+  options?: Record<string, unknown>;
+  size?: Size;
+  theme?: WidgetTheme;
+  themeHover?: WidgetTheme;
+  children?: string[];
+}
+
+type Size = [number, number];
 
 type GradientValue = [number, string, string];
 
-interface InitialWidgetData {
-  label: string;
+type Background =
+  | ['color', string]
+  | ['gradient', ...GradientValue]
+  | ['image', string];
+
+type ComplexBackground =
+  | Background
+  | ['video', string]
+  | ['iframe', string]
+  | ['youtube', string];
+
+interface Font {
+  color?: string;
+  family?: string;
+  italic?: boolean;
+  size?: number;
+  weight?: number;
 }
 
-type WidgetData = InitialWidgetData & Record<string, unknown>;
+interface BoxShadow {
+  offsetX?: number;
+  offsetY?: number;
+  blur?: number;
+  spread?: number;
+  color?: string;
+  inset?: boolean;
+}
 
-interface StoredWidgetType {
-  /** Type */
-  t: string;
-  /** Data */
-  d: WidgetData;
-  /** Children */
-  c?: string[];
+interface TextShadow {
+  offsetX?: number;
+  offsetY?: number;
+  blur?: number;
+  color?: string;
+}
+
+interface Transform {
+  translateX?: number;
+  translateY?: number;
+  scale?: number;
+  rotate?: number;
+}
+
+interface ToolbarTheme {
+  background?: Background;
+  radius?: number;
+  shadow?: BoxShadow;
+}
+
+interface Transition {
+  duration?: number;
+  function?: string;
+}
+
+interface WidgetTheme {
+  background?: Background;
+  color?: string;
+  fontFamily?: string;
+  labelFont?: Font;
+  radius?: number;
+  shadow?: BoxShadow;
+  labelShadow?: TextShadow;
+  transform?: Transform;
+  labelTransform?: Transform;
+  transition?: Transition;
+}
+
+interface Theme {
+  background?: ComplexBackground;
+  color?: {
+    accent?: string;
+    neutral?: string;
+  };
+  fontFamily?: string;
+  radius?: number;
+  toolbar?: ToolbarTheme;
+  widget?: WidgetTheme;
+  widgetHover?: WidgetTheme;
+}
+
+interface Layout {
+  dashboard?: {
+    columns?: number;
+    margin?: number;
+    gap?: number;
+    size?: number;
+  };
+  toolbar?: {
+    margin?: number;
+    padding?: number;
+    position?: 'top' | 'bottom';
+  };
+}
+
+interface Page {
+  pageTitle?: string;
+  showHelp?: boolean;
+  linkTarget?: '_self' | '_blank';
+  linkContainer?: string;
+}
+
+interface Settings {
+  theme?: Theme;
+  layout?: Layout;
+  page?: Page;
+}
+
+interface User {
+  settings?: Settings;
+  presets?: Presets;
+  icons?: string[];
+}
+
+interface Workspace {
+  name: string;
+  widgets: Record<string, WidgetData>;
+  settings?: Settings;
+}
+
+interface Presets {
+  layouts?: Record<string, Layout>;
+  themes?: Record<string, Theme>;
+  widgets?: Record<string, WidgetData>;
+  workspaces?: Record<string, Workspace>;
+}
+
+interface Local {
+  sync: boolean;
+  updated: boolean;
 }
 
 interface StorageObject {
   sourcetab: string;
   date: number;
-  releaseNotes: boolean;
-  widgets: Record<string, StoredWidgetType>;
-  settings: {
-    widgets: Record<string, Record<string, unknown>>;
-    themeColor: string;
-    darkMode: 'auto' | 'enabled' | 'disabled';
-    pageTitle: string;
-    borderRadius: number;
-    showHelp: boolean;
-    dashboard: {
-      columns: number;
-      margin: number;
-      gap: number;
-      radius: number;
-      size: number;
-    };
-    toolbar: {
-      position: 'top' | 'bottom';
-    };
-    bg:
-      | ['color', string]
-      | ['gradient', ...GradientValue]
-      | ['image', string]
-      | ['video', string]
-      | ['iframe', string]
-      | ['youtube', string];
-    icons: string[];
-  };
+  user: User;
+  workspace: string;
+  workspaces: Record<string, Workspace>;
   files: Record<string, string>;
+  local: Local;
 }
 
-type SetStorageObject = import('use-immer').Updater<StorageObject>;
+interface DataSelection {
+  workspace: {
+    widgets: boolean;
+    theme: boolean;
+    layout: boolean;
+    page: boolean;
+  };
+  workspaces: Record<string, boolean>;
+  presets: {
+    themes: boolean;
+    layouts: boolean;
+    widgets: boolean;
+  };
+  files: Record<string, boolean>;
+}
 
-interface Widget<
-  LocalData = Record<string, unknown>,
-  GlobalData = Record<string, unknown>,
-> {
+interface Widget<Options = Record<string, unknown>> {
   name: string;
-  help: string;
-  defaultData: LocalData;
-  exampleData: LocalData;
-  defaultGlobalData: GlobalData;
-  Widget: (props: {
-    data: LocalData & InitialWidgetData;
-    setData: (newValue: LocalData & InitialWidgetData) => void;
-    globalData: GlobalData;
-    setGlobalData: (newValue: GlobalData) => void;
+  defaultOptions: Options;
+  exampleOptions: Options;
+  Component: import('solid-js').Component<{
+    options: Inter<Options>;
     inToolbar?: boolean;
-    disable?: boolean;
-  }) => React.ReactElement;
-  Settings: (props: {
-    data: LocalData & InitialWidgetData;
-    setData: (newValue: LocalData & InitialWidgetData) => void;
-    globalData: GlobalData;
-    setGlobalData: (newValue: GlobalData) => void;
-  }) => React.ReactElement;
-  GlobalSettings?: (props: {
-    data: GlobalData;
-    setData: (newValue: GlobalData) => void;
-  }) => React.ReactElement;
+    disabled?: boolean;
+  }>;
+  options?: Record<
+    string,
+    { control?: import('solid-js').Component } & (
+      | {
+          type: 'text';
+          default: string;
+          example?: string;
+        }
+      | {
+          type: 'select';
+          default: string;
+          options?: Record<string, string>;
+        }
+      | {
+          type: 'boolean';
+          default: boolean;
+        }
+      | {
+          type: 'number';
+          default: number;
+          min?: number;
+          max?: number;
+          step?: number;
+        }
+      | {
+          type: 'icon';
+          default: string;
+        }
+      | {
+          type: 'color';
+          default: string;
+          alpha?: boolean;
+        }
+    )
+  >;
+  Options: import('solid-js').Component<{
+    options: Inter<Options>;
+  }>;
 }

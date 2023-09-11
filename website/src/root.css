@@ -1,0 +1,77 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .heading {
+    @apply mt-6 mb-4 font-semibold leading-[1.25];
+  }
+
+  .divider {
+    @apply border-b border-slate-400 border-opacity-20;
+  }
+
+  .link {
+    @apply hover:text-blue-500;
+  }
+
+  .btn {
+    @apply px-6 py-2 rounded-lg font-bold;
+  }
+
+  .btn-primary {
+    @apply btn bg-blue-400 hover:bg-blue-500 dark:bg-blue-500 dark:hover:bg-blue-600;
+  }
+
+  .btn-secondary {
+    @apply btn border border-blue-500 bg-blue-600 bg-opacity-5 hover:bg-opacity-30;
+  }
+}
+
+html {
+  @apply scroll-smooth;
+}
+
+body {
+  @apply font-sans bg-white text-slate-900 dark:bg-slate-900 dark:text-white;
+}
+
+p {
+  @apply text-base pb-4;
+}
+
+ul {
+  @apply list-disc pb-4 pl-8;
+}
+
+ol {
+  @apply list-decimal pb-4 pl-8;
+}
+
+hr {
+  @apply divider border-t-0 my-6;
+}
+
+h1 {
+  @apply heading text-4xl pb-2 divider;
+}
+
+h2 {
+  @apply heading text-3xl pb-1 divider;
+}
+
+h3 {
+  @apply heading text-2xl;
+}
+
+h4 {
+  @apply heading text-xl;
+}
+
+h5 {
+  @apply heading text-lg;
+}
+
+h6 {
+  @apply heading text-base;
+}

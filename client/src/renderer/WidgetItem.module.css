@@ -1,0 +1,55 @@
+.root {
+  position: 'relative';
+
+  transition: var(--widget-default-root-transition);
+  transition-timing-function: var(
+    --widget-default-root-transitionTimingFunction
+  );
+}
+
+.rootHover:hover {
+  transition: var(--widget-hover-root-transition);
+  transition-timing-function: var(--widget-hover-root-transitionTimingFunction);
+}
+
+.root > .widget {
+  background: var(--widget-default-widget-background);
+  border-radius: var(--widget-default-widget-borderRadius);
+  box-shadow: var(--widget-default-widget-boxShadow);
+  color: var(--widget-default-widget-color);
+  font-family: var(--widget-default-widget-fontFamily);
+  transform: var(--widget-default-widget-transform);
+}
+
+.rootHover:hover > .widget {
+  background: var(--widget-hover-widget-background);
+  border-radius: var(--widget-hover-widget-borderRadius);
+  box-shadow: var(--widget-hover-widget-boxShadow);
+  color: var(--widget-hover-widget-color);
+  font-family: var(--widget-hover-widget-fontFamily);
+  transform: var(--widget-hover-widget-transform);
+}
+
+.root > .label {
+  width: 100%;
+  text-align: center;
+  word-wrap: break-word;
+
+  color: var(--widget-default-label-color);
+  font-family: var(--widget-default-label-fontFamily);
+  font-size: var(--widget-default-label-fontSize);
+  font-style: var(--widget-default-label-fontStyle);
+  font-weight: var(--widget-default-label-fontWeight);
+  text-shadow: var(--widget-default-label-textShadow);
+  transform: var(--widget-default-label-transform);
+}
+
+.rootHover:hover > .label {
+  color: var(--widget-hover-label-color);
+  font-family: var(--widget-hover-label-fontFamily);
+  font-size: var(--widget-hover-label-fontSize);
+  font-style: var(--widget-hover-label-fontStyle);
+  font-weight: var(--widget-hover-label-fontWeight);
+  text-shadow: var(--widget-hover-label-textShadow);
+  transform: var(--widget-hover-label-transform);
+}

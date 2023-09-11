@@ -1,27 +1,9 @@
-import {CssBaseline} from '@mui/material';
-import {useContext} from 'react';
-import {createRoot} from 'react-dom/client';
+/* @refresh reload */
+import {render} from 'solid-js/web';
 
-import {
-  storageContext,
-  StorageContextProvider,
-} from '@/hooks/useStorage/storageContext';
+import './index.css';
+
 import App from './App';
-import GlobalContexts from './GlobalContexts';
+import {storage} from './storage';
 
-// Only render app if storage is loaded
-const StorageCatcher: FC = ({children}) => (
-  <>{useContext(storageContext) ? children : undefined}</>
-);
-createRoot(document.querySelector('#root')).render(
-  <>
-    <StorageContextProvider>
-      <StorageCatcher>
-        <GlobalContexts>
-          <CssBaseline />
-          <App />
-        </GlobalContexts>
-      </StorageCatcher>
-    </StorageContextProvider>
-  </>,
-);
+render(() => <>{storage.date && <App />}</>, document.querySelector('#root')!);

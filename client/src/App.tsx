@@ -1,22 +1,20 @@
-import {useEffect} from 'react';
+import { Component, createEffect, onMount } from 'solid-js';
+import Background from './Background';
+import Renderer from './renderer';
+import { storage } from './storage';
+import { useWorkspace } from './storage/useWorkspace';
 
-import useStorage from './hooks/useStorage';
-import Background from './views/Background';
-import ReleaseNotes from './views/ReleaseNotes';
-import WidgetRenderer from './views/WidgetRenderer';
+const App: Component = () => {
+  const [ws] = useWorkspace();
 
-const App: FC = () => {
-  const [data] = useStorage();
-
-  useEffect(() => {
-    document.title = data.settings.pageTitle;
-  }, [data.settings.pageTitle]);
+  createEffect(() => {
+    document.title = ws.settings.page.pageTitle;
+  });
 
   return (
     <>
       <Background />
-      <WidgetRenderer />
-      <ReleaseNotes />
+      <Renderer />
     </>
   );
 };

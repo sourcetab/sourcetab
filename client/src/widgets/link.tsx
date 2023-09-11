@@ -1,61 +1,69 @@
-import {Box, BoxProps, IconButton, SvgIcon} from '@mui/material';
-import {Icon} from '@iconify-icon/react';
+import {Icon} from '@iconify-icon/solid';
+import {Dynamic} from 'solid-js/web';
+import {useWorkspace} from '~/storage/useWorkspace';
 
-import Inputs from '@/components/Inputs';
-import ContainerPicker from '@/components/ContainerPicker';
-
-const link: Widget<
-  {
-    url: string;
-    fgType: 'img' | 'ico' | 'let';
-    fgData: string;
-    bgColor: string;
-    fgColor: string;
-    scale: number;
-    container?: string;
-  },
-  {
-    openInNewTab: boolean;
-  }
-> = {
+const link: Widget<{
+  url: string;
+  target: '_self' | '_blank';
+  container: string;
+  content: ['img' | 'ico' | 'let', string];
+  scale: number;
+}> = {
   name: 'Link',
-  help: 'link',
-  defaultData: {
+  defaultOptions: {
     url: '',
-    fgType: 'ico',
-    fgData: '',
-    bgColor: 'FFFFFF',
-    fgColor: '000000',
+    target: '_self',
+    container: '',
+    content: ['ico', ''],
     scale: 100,
   },
-  exampleData: {
+  exampleOptions: {
     url: 'https://www.wikipedia.org',
-    fgType: 'ico',
-    fgData: 'simple-icons:wikipedia',
-    bgColor: '000000',
-    fgColor: 'FFFFFF',
+    target: '_self',
+    container: '',
+    content: ['ico', 'wikipedia'],
     scale: 100,
   },
-  defaultGlobalData: {
-    openInNewTab: false,
-  },
-  Widget({data, globalData, disable, inToolbar}) {
-    let visual: React.ReactNode;
-    switch (data.fgType) {
+  Component(props) {
+    const [ws] = useWorkspace();
+
+    const options = () => props.options[0];
+    const setOptions = () => props.options[1];
+    const rawOptions = () => props.options[2];
+
+    const target = () => rawOptions().target ?? ws.settings.page.linkTarget;
+    const container = () =>
+      rawOptions().container ?? ws.settings.page.linkContainer;
+
+    const visual = () => (
+      <Icon
+        height={props.inToolbar ? 24 : '100%'}
+        icon={options().content[1]}
+        width={props.inToolbar ? 24 : '100%'}
+        style={{
+          transform: `scale(${
+            options().scale * (props.inToolbar ? 0.01 : 0.007)
+          })`,
+        }}
+      />
+    );
+
+    /*
+    switch (options.content[0]) {
       case 'img': {
         visual = inToolbar ? (
           <SvgIcon
             sx={{
-              fill: `#${data.fgColor}`,
               transform: `scale(${data.scale * 0.0167})`,
+              fill: `#${data.theme.default.color}`,
             }}
           >
-            <image height='24' href={data.fgData} width='24' />
+            <image height="24" href={data.contentData} width="24" />
           </SvgIcon>
         ) : (
           <Box
-            component='img'
-            src={data.fgData}
+            component="img"
+            src={data.contentData}
             sx={{
               width: '100%',
               height: '100%',
@@ -70,11 +78,10 @@ const link: Widget<
         visual = (
           <Icon
             height={inToolbar ? 24 : '100%'}
-            icon={data.fgData}
+            icon={options.content[1]}
             width={inToolbar ? 24 : '100%'}
             style={{
-              color: `#${data.fgColor}`,
-              transform: `scale(${data.scale * (inToolbar ? 0.01 : 0.007)})`,
+              transform: `scale(${options.scale * (inToolbar ? 0.01 : 0.007)})`,
             }}
           />
         );
@@ -84,9 +91,9 @@ const link: Widget<
         visual = (
           <SvgIcon
             sx={{
-              fill: `#${data.fgColor}`,
+              fill: `#${data.theme.default.color}`,
               ...(inToolbar
-                ? {transform: `scale(1.67)`}
+                ? { transform: `scale(1.67)` }
                 : {
                     width: '100%',
                     height: '100%',
@@ -94,14 +101,14 @@ const link: Widget<
             }}
           >
             <text
-              dominantBaseline='middle'
+              dominantBaseline="middle"
               fontSize={data.scale * 0.14}
-              fontWeight='bold'
-              textAnchor='middle'
-              x='12'
-              y='12'
+              fontWeight="bold"
+              textAnchor="middle"
+              x="12"
+              y="12"
             >
-              {data.fgData}
+              {data.contentData}
             </text>
           </SvgIcon>
         );
@@ -111,182 +118,42 @@ const link: Widget<
         break;
       }
     }
+    */
 
-    const anchorProps: BoxProps = disable
-      ? {}
-      : {
-          component: 'a',
-          href: data.url,
-          target: globalData.openInNewTab ? '_blank' : undefined,
-          ...(PLATFORM === 'FIREFOX' && data.container
-            ? {
-                async onClick(e) {
-                  e.preventDefault();
-                  const current = await browser.tabs.getCurrent();
-                  if (globalData.openInNewTab) {
-                    browser.tabs.create({
-                      url: data.url,
-                      cookieStoreId: data.container,
-                      index: current!.index + 1,
-                    });
-                  } else {
-                    browser.tabs.create({
-                      url: data.url,
-                      cookieStoreId: data.container,
-                      index: current!.index + 1,
-                    });
-                    browser.tabs.remove(current!.id!);
-                  }
-                },
-                async onAuxClick(e) {
-                  e.preventDefault();
+    const anchorProps = () =>
+      props.disabled
+        ? {component: 'div'}
+        : {
+            component: 'a',
+            href: options().url,
+            target: target(),
+          };
 
-                  browser.tabs.create({
-                    url: data.url,
-                    cookieStoreId: data.container,
-                    active: false,
-                    index: (await browser.tabs.getCurrent())!.index + 1,
-                  });
-                },
-              }
-            : {}),
-        };
-
-    return inToolbar ? (
-      <Box sx={{backgroundColor: `#${data.bgColor}`, borderRadius: '50%'}}>
-        <IconButton sx={{overflow: 'hidden'}} {...anchorProps}>
-          {visual}
-        </IconButton>
-      </Box>
-    ) : (
-      <Box
-        {...anchorProps}
-        sx={{
-          width: '100%',
-          height: '100%',
-          display: 'flex',
-          color: 'black',
-          textDecoration: 'none',
-          borderRadius: 'inherit',
-          backgroundColor: `#${data.bgColor}`,
-          overflow: 'hidden',
-        }}
+    return (
+      <Dynamic
+        {...anchorProps()}
+        class='w-full h-full flex overflow-hidden text-inherit'
       >
-        {visual}
-      </Box>
+        {visual()}
+      </Dynamic>
     );
-  },
-  Settings({data, setData}) {
-    let fgDataElement;
-    switch (data.fgType) {
-      case 'ico': {
-        fgDataElement = (
-          <Inputs.Icon
-            initialSearch={data.label}
-            label='Foreground Icon'
-            value={data.fgData}
-            onChange={(newValue) => {
-              setData({...data, fgData: newValue});
-            }}
-          />
-        );
-        break;
-      }
-      case 'img': {
-        fgDataElement = (
-          <Inputs.File
-            accept='image/*'
-            label='Foreground Image'
-            value={data.fgData}
-            onChange={
-              (newValue) =>
-                // @ts-expect-error
-                setData((data) => ({...data, fgData: newValue})) // eslint-disable-line @typescript-eslint/no-unsafe-return
-            }
-          />
-        );
-        break;
-      }
-      case 'let': {
-        fgDataElement = (
-          <Inputs.Text
-            label='Foreground Letter'
-            onChange={(newValue) => setData({...data, fgData: newValue})}
-            value={data.fgData}
-          />
-        );
-        break;
-      }
-      default: {
-        fgDataElement = <></>;
-        break;
-      }
-    }
+    // inToolbar ? (
+    //   <Box
+    //     sx={{
+    //       // backgroundColor: `#${data.bgColor}`,
+    //       borderRadius: '50%',
+    //     }}
+    //   >
+    //     <IconButton sx={{ overflow: 'hidden' }} {...anchorProps}>
+    //       {visual}
+    //     </IconButton>
+    //   </Box>
+    // ) : (
 
-    return (
-      <>
-        <Inputs.Text
-          label='URL'
-          onChange={(newValue) => setData({...data, url: newValue})}
-          value={data.url}
-        />
-        <Inputs.Select
-          label='Foreground Type'
-          options={{ico: 'Icon', img: 'Image', let: 'Letter'}}
-          value={data.fgType}
-          onChange={(newValue) =>
-            setData({...data, fgType: newValue, fgData: ''})
-          }
-        />
-        {fgDataElement}
-        <Inputs.Color
-          alpha
-          label='Background Color'
-          onChange={(newValue) => setData({...data, bgColor: newValue})}
-          value={data.bgColor}
-        />
-        <Inputs.Color
-          alpha
-          label='Foreground Color'
-          onChange={(newValue) => setData({...data, fgColor: newValue})}
-          value={data.fgColor}
-        />
-        <Inputs.Number
-          label='Scale'
-          onChange={(newValue) => setData({...data, scale: newValue})}
-          softMax={200}
-          softMin={50}
-          value={data.scale}
-        />
-        {PLATFORM === 'FIREFOX' && (
-          <ContainerPicker
-            value={data.container ?? ''}
-            onChange={(newValue) => {
-              setData({
-                ...data,
-                container: newValue === '' ? undefined : newValue,
-              });
-            }}
-          />
-        )}
-      </>
-    );
+    // );
   },
-  GlobalSettings({data, setData}) {
-    return (
-      <>
-        <Inputs.Switch
-          label='Open in New Tab'
-          value={data.openInNewTab}
-          onChange={(newValue) =>
-            setData({
-              ...data,
-              openInNewTab: newValue,
-            })
-          }
-        />
-      </>
-    );
+  Options() {
+    return <></>;
   },
 };
 

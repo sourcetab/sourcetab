@@ -1,6 +1,5 @@
 export default function genId(): string {
   return String.fromCodePoint(
-    // eslint-disable-next-line unicorn/no-useless-spread
     ...[...Array.from({length: 12})].map(() => {
       let code = Math.floor(Math.random() * 93) + 32;
 

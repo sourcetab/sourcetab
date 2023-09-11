@@ -1,24 +1,30 @@
-import {readFileSync} from 'node:fs';
 import {resolve} from 'node:path';
-import process from 'node:process';
 
-import react from '@vitejs/plugin-react-swc';
-import {visualizer} from 'rollup-plugin-visualizer';
-import zipPack from 'vite-plugin-zip-pack';
-import {WebExtPlugin} from 'unplugin-web-ext/vite';
 import {defineConfig, type PluginOption} from 'vite';
+import solidPlugin from 'vite-plugin-solid';
+import {visualizer} from 'rollup-plugin-visualizer';
+import pkg from './package.json';
 
-const pkg = JSON.parse(readFileSync('../package.json', {encoding: 'utf8'}));
-
-const platform = process.env.platform as 'web' | 'chrome' | 'firefox';
+const platform =
+  (process.env.platform as 'web' | 'chrome' | 'firefox') ?? 'web';
 
 export default defineConfig({
+  plugins: [
+    solidPlugin(),
+    visualizer({
+      filename: 'dist/stats.html',
+    }) as PluginOption,
+  ],
+  server: {
+    port: 3000,
+  },
   build: {
     outDir: `dist/${platform}`,
+    target: 'esnext',
   },
   resolve: {
     alias: {
-      '@': resolve('./src'),
+      '~': resolve('./src'),
     },
   },
   define: {
@@ -26,31 +32,4 @@ export default defineConfig({
     VERSION: JSON.stringify(pkg.version),
     PLATFORM: JSON.stringify(platform.toUpperCase()),
   },
-  plugins: [
-    react(),
-    ...(platform === 'web'
-      ? []
-      : [
-          WebExtPlugin({
-            manifest: [
-              './src/manifest.json',
-              {
-                version: pkg.version,
-                manifest_version: platform === 'firefox' ? 2 : 3,
-              },
-              platform === 'firefox' ? './src/manifest-firefox.json' : {},
-            ],
-          }) as unknown as PluginOption,
-          zipPack({
-            inDir: `dist/${platform}`,
-            outDir: 'dist',
-            outFileName: `${platform}.${
-              platform === 'firefox' ? 'xpi' : 'zip'
-            }`,
-          }) as unknown as PluginOption,
-        ]),
-    visualizer({
-      filename: 'dist/stats.html',
-    }) as PluginOption,
-  ],
 });

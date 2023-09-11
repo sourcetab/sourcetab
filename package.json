@@ -12,9 +12,7 @@
     "website"
   ],
   "dependencies": {
-    "eslint-config-xo-react": "^0.27.0",
-    "eslint-plugin-react": "^7.32.2",
-    "eslint-plugin-react-hooks": "^4.6.0",
+    "eslint-plugin-solid": "^0.12.1",
     "xo": "^0.54.1"
   },
   "prettier": {
@@ -25,12 +23,10 @@
     "trailingComma": "all"
   },
   "xo": {
-    "extends": "xo-react",
+    "plugins": "solid",
+    "extends": "plugin:solid/typescript",
     "prettier": true,
     "space": 2,
-    "ignores": [
-      "website/next-env.d.ts"
-    ],
     "rules": {
       "@typescript-eslint/ban-ts-comment": "off",
       "@typescript-eslint/consistent-type-definitions": "off",
@@ -53,7 +49,7 @@
         {
           "pathGroups": [
             {
-              "pattern": "@/**",
+              "pattern": "~/**",
               "group": "external",
               "position": "after"
             }
@@ -66,25 +62,6 @@
       "max-depth": "off",
       "n/file-extension-in-import": "off",
       "new-cap": "off",
-      "react/function-component-definition": [
-        "error",
-        {
-          "namedComponents": "arrow-function",
-          "unnamedComponents": "arrow-function"
-        }
-      ],
-      "react-hooks/exhaustive-deps": "off",
-      "react/jsx-no-useless-fragment": "off",
-      "react/jsx-sort-props": [
-        "error",
-        {
-          "multiline": "last",
-          "shorthandFirst": true
-        }
-      ],
-      "react/prop-types": "off",
-      "react/react-in-jsx-scope": "off",
-      "react/require-default-props": "off",
       "unicorn/filename-case": [
         "error",
         {

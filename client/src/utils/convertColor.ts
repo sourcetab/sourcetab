@@ -72,21 +72,17 @@ export function rgbToHsv(
     bDif = diffC(b);
 
     switch (v) {
-      case r: {
+      case r:
         h = bDif - gDif;
         break;
-      }
-      case g: {
+      case g:
         h = 1 / 3 + rDif - bDif;
         break;
-      }
-      case b: {
+      case b:
         h = 2 / 3 + gDif - rDif;
         break;
-      }
-      default: {
+      default:
         break;
-      }
     }
 
     if (h < 0) {
@@ -114,26 +110,19 @@ export function hsvToRgb(
   v *= 255;
 
   switch (Math.floor(h) % 6) {
-    case 0: {
+    case 0:
       return [v, t, p];
-    }
-    case 1: {
+    case 1:
       return [q, v, p];
-    }
-    case 2: {
+    case 2:
       return [p, v, t];
-    }
-    case 3: {
+    case 3:
       return [p, q, v];
-    }
-    case 4: {
+    case 4:
       return [t, p, v];
-    }
-    case 5: {
+    case 5:
       return [v, p, q];
-    }
-    default: {
+    default:
       break;
-    }
   }
 }

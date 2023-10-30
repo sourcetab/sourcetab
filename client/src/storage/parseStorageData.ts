@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/no-unsafe-call */
 
-import { genId, nonPatchVersionLessThan, versionLessThan } from '~/utils';
+import {genId, nonPatchVersionLessThan, versionLessThan} from '~/utils';
 
 import genDefaultData from './genDefaultData';
 
@@ -23,10 +23,10 @@ export default function parseStorageData(
           // TODO: carry over layout (apperance) settings
         } else if (versionLessThan(version, '3.0.0')) {
           const widgets = {
-            d: { children: [] },
-            tl: { children: [] },
-            tc: { children: [] },
-            tr: { children: ['m'] },
+            d: {children: []},
+            tl: {children: []},
+            tc: {children: []},
+            tr: {children: ['m']},
           } as unknown as NonNullable<Workspace['widgets']>;
 
           if (data.clock.render) {

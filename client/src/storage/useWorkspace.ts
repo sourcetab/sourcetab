@@ -1,6 +1,6 @@
-import { deepmerge } from '~/utils';
-import { setStorage, storage } from '.';
-import { defaultSettings } from './defaultSettings';
+import {deepmerge} from '~/utils';
+import {defaultSettings} from './defaultSettings';
+import {setStorage, storage} from '.';
 
 export const useWorkspace: () => Inter<Workspace> = () => {
   const rawWorkspace = storage.workspaces[storage.workspace];

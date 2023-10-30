@@ -1,9 +1,9 @@
 import {Component, For, createSignal, onCleanup, onMount} from 'solid-js';
-import LeftArrow from '~icons/material-symbols/arrow-left-rounded';
-import RightArrow from '~icons/material-symbols/arrow-right-rounded';
 import screenshot1 from '../../../brand/screenshots/small/screenshot1.webp';
 import screenshot2 from '../../../brand/screenshots/small/screenshot2.webp';
 import screenshot3 from '../../../brand/screenshots/small/screenshot3.webp';
+import RightArrow from '~icons/material-symbols/arrow-right-rounded';
+import LeftArrow from '~icons/material-symbols/arrow-left-rounded';
 
 const images = [screenshot1, screenshot2, screenshot3];
 

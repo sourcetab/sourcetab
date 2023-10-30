@@ -1,11 +1,10 @@
 import {Component} from 'solid-js';
 import {A} from 'solid-start';
+import Features from '~/components/Features.mdx';
+import Screenshots from '~/components/Screenshots';
 import ChromeIcon from '~icons/simple-icons/googlechrome';
 import EdgeIcon from '~icons/simple-icons/microsoftedge';
 import FirefoxIcon from '~icons/simple-icons/firefoxbrowser';
-
-import Features from '~/components/Features.mdx';
-import Screenshots from '~/components/Screenshots';
 
 const Home: Component = () => {
   return (

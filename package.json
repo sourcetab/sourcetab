@@ -3,7 +3,7 @@
   "private": true,
   "version": "3.3.0",
   "scripts": {
-    "test": "xo",
+    "test": "xo --fix",
     "build": "npm run build:web -w client && npm run build -w website"
   },
   "workspaces": [

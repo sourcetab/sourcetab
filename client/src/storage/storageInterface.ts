@@ -31,12 +31,12 @@ export function storageSet<T>(key: string, value: T) {
     }
 
     case 'CHROME': {
-      chrome.storage.local.set({ [key]: value });
+      chrome.storage.local.set({[key]: value});
       break;
     }
 
     case 'FIREFOX': {
-      browser.storage.local.set({ [key]: value });
+      browser.storage.local.set({[key]: value});
       break;
     }
 

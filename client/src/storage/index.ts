@@ -1,8 +1,8 @@
-import { batch } from 'solid-js';
-import { createStore, produce } from 'solid-js/store';
+import {batch} from 'solid-js';
+import {createStore, produce} from 'solid-js/store';
 import genDefaultData from './genDefaultData';
 import parseStorageData from './parseStorageData';
-import { storageGet, storageListen, storageSet } from './storageInterface';
+import {storageGet, storageListen, storageSet} from './storageInterface';
 
 const key = 'sourcetab';
 
@@ -19,7 +19,7 @@ storageListen<StorageObject>(key, (value) => {
   if (value.date > rawStorage.date) setRawStorage(value);
 });
 
-export { rawStorage as storage };
+export {rawStorage as storage};
 export const setStorage = (fn: (state: StorageObject) => void) => {
   console.log('prev', rawStorage.date);
   batch(() => {

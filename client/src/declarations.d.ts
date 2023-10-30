@@ -188,7 +188,7 @@ interface Widget<Options = Record<string, unknown>> {
   }>;
   options?: Record<
     string,
-    { control?: import('solid-js').Component } & (
+    {control?: import('solid-js').Component} & (
       | {
           type: 'text';
           default: string;

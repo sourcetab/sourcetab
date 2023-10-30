@@ -10,7 +10,7 @@ const NavItem: ParentComponent<
   return (
     <Button.Root
       class={
-        'flex px-3 py-[6px] w-full rounded hover:bg-slate-200 ' +
+        'flex px-4 py-2 w-full rounded hover:bg-slate-200 ' +
         String(local.class)
       }
       {...other}

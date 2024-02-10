@@ -1,0 +1,416 @@
+openapi: 3.0.2
+servers: []
+info:
+  version: 1.0.0
+  title: Sourcetab api schema
+tags:
+  - name: auth
+    description: Authentication related routes
+  - name: user
+    description: User related routes
+  - name: resource
+    description: Resource related routes
+security:
+  - {}
+  - BearerAuth: []
+paths:
+  /api/v1/auth/status:
+    get:
+      tags:
+        - auth
+      summary: Retrieve account status
+      operationId: accountStatus
+      responses:
+        '200':
+          description: OK
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [user]
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/auth/register:
+    post:
+      tags:
+        - auth
+      summary: Register a new account
+      operationId: registerAccount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, email, password]
+              properties:
+                username:
+                  $ref: '#/components/schemas/Username'
+                email:
+                  $ref: '#/components/schemas/Email'
+                password:
+                  $ref: '#/components/schemas/Password'
+      responses:
+        '200':
+          description: Registration successful
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [user]
+                properties:
+                  user:
+                    $ref: '#/components/schemas/User'
+        '400':
+          description: Bad registration params
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/auth/login:
+    post:
+      tags:
+        - auth
+      summary: Generate and fetch auth token
+      operationId: loginAccount
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [username, password]
+              properties:
+                username:
+                  $ref: '#/components/schemas/Username'
+                password:
+                  $ref: '#/components/schemas/Password'
+      responses:
+        '200':
+          description: Login successful
+          content:
+            application/json:
+              schema:
+                type: object
+                required: [session, user]
+                properties:
+                  session:
+                    $ref: '#/components/schemas/Session'
+                  user:
+                    $ref: '#/components/schemas/User'
+        '401':
+          description: Bad login credentials
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/auth/refresh:
+    post:
+      tags:
+        - auth
+      summary: Refresh authentication token
+      operationId: refreshToken
+      responses:
+        '200':
+          description: Refresh successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Session'
+        '401':
+          description: Unauthorized
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/auth/logout:
+    post:
+      tags:
+        - auth
+      summary: Revoke authentication token
+      operationId: logoutAccount
+      responses:
+        '200':
+          description: Logout successful
+        '401':
+          description: Unauthorized
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/auth/delete:
+    delete:
+      tags:
+        - auth
+      summary: Delete the authenticated account and it's data
+      operationId: deleteAccount
+      responses:
+        '200':
+          description: Account deletion successful
+        '401':
+          description: Unauthorized
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/users:
+    get:
+      tags:
+        - user
+      summary: List users
+      operationId: listUsers
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/User'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/users/{userID}:
+    get:
+      tags:
+        - user
+      summary: Find user by ID
+      operationId: getUserById
+      parameters:
+        - name: userID
+          in: path
+          description: ID of user to return
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  '/api/v1/users/name/{username}':
+    get:
+      tags:
+        - user
+      summary: Find user by username
+      operationId: getUserByName
+      parameters:
+        - name: username
+          in: path
+          description: Username of user to return
+          required: true
+          schema:
+            $ref: '#/components/schemas/Username'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/User'
+        '404':
+          description: User not found
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/resources:
+    get:
+      tags:
+        - resource
+      summary: List resources
+      operationId: listResources
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/Resource'
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+    post:
+      tags:
+        - auth
+      summary: Create resource
+      operationId: createResource
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - type
+                - visibility
+                - name
+                - data
+              properties:
+                type:
+                  type: string
+                  enum: [workspace, theme]
+                visibility:
+                  type: string
+                  enum: [public, private]
+                name:
+                  type: string
+                data:
+                  type: string
+      responses:
+        '200':
+          description: Creation successful
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '401':
+          description: Unauthorized
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+  /api/v1/resources/{resourceID}:
+    get:
+      tags:
+        - resource
+      summary: Find resource by ID
+      operationId: getResourceById
+      parameters:
+        - name: resourceID
+          in: path
+          description: ID of resource to return
+          required: true
+          schema:
+            $ref: '#/components/schemas/ID'
+      responses:
+        '200':
+          description: successful operation
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resource'
+        '404':
+          description: User not found
+        '429':
+          $ref: '#/components/responses/RateLimitError'
+        '500':
+          $ref: '#/components/responses/ServerError'
+
+components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: uuid
+  schemas:
+    ID:
+      type: integer
+      format: int64
+      example: 23
+    Username:
+      type: string
+      example: johnsmith
+      minLength: 3
+      pattern: ^[A-Za-z][A-Za-z0-9_]*$
+    Email:
+      type: string
+      format: email
+      example: johnsmith@example.com
+    Password:
+      type: string
+      example: pass1234
+      minLength: 8
+    User:
+      type: object
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - username
+      properties:
+        id:
+          $ref: '#/components/schemas/ID'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        username:
+          $ref: '#/components/schemas/Username'
+    Session:
+      type: object
+      required: [token, expires]
+      properties:
+        token:
+          type: string
+          format: uuid
+        expires:
+          type: string
+          format: date-time
+    Resource:
+      type: object
+      required:
+        - id
+        - createdAt
+        - updatedAt
+        - type
+        - userID
+        - visibility
+        - name
+        - data
+      properties:
+        id:
+          $ref: '#/components/schemas/ID'
+        createdAt:
+          type: string
+          format: date-time
+        updatedAt:
+          type: string
+          format: date-time
+        type:
+          type: string
+          enum: [workspace, theme]
+        userID:
+          $ref: '#/components/schemas/ID'
+        visibility:
+          type: string
+          enum: [public, private]
+        name:
+          type: string
+        data:
+          type: string
+  responses:
+    RateLimitError:
+      description: Too Many Requests
+    ServerError:
+      description: Internal Server Error

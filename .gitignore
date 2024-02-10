@@ -1,3 +1,4 @@
 node_modules
 dist
 .solid
+/server/cmd/sourcetab/public/client
